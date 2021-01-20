@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:orientation="vertical"
+    android:gravity="center_horizontal"
+    android:background="@color/white"
+    android:padding="20dp">
+
+    <ImageView
+        android:id="@+id/qr_code_iv"
+        android:transitionName="itemImageTransition"
+        android:layout_width="300dp"
+        android:layout_height="300dp"
+        android:contentDescription="@string/show_this_qr_code_to_your_office_canteen"/>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        android:text="@string/show_this_qr_code_to_your_office_canteen"
+        android:textStyle="bold"/>
+
+</LinearLayout>

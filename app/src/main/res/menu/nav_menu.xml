@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu
+    xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <group
+        android:id="@+id/nav_part_0"
+        android:checkableBehavior="single">
+        <item
+            android:id="@+id/nav_food_menu"
+            android:icon="@drawable/ic_food_menu"
+            android:title="@string/food_menu"
+            android:checked="true"/>
+    </group>
+
+    <group
+        android:id="@+id/nav_part_1"
+        android:checkableBehavior="single">
+        <item android:title="@string/account">
+            <menu>
+                <item
+                    android:id="@+id/nav_profile"
+                    android:icon="@drawable/ic_user"
+                    android:title="@string/profile"/>
+                <item
+                    android:id="@+id/nav_my_orders"
+                    android:icon="@drawable/ic_my_orders"
+                    android:title="@string/my_orders"/>
+                <item
+                    android:id="@+id/nav_orders_history"
+                    android:icon="@drawable/ic_order_history"
+                    android:title="@string/orders_history"/>
+            </menu>
+        </item>
+    </group>
+
+    <group
+        android:id="@+id/nav_part_2"
+        android:checkableBehavior="single">
+        <item android:title="@string/support">
+            <menu>
+                <item
+                    android:id="@+id/nav_share_app"
+                    android:icon="@drawable/ic_share"
+                    android:title="@string/share_app"/>
+                <item
+                    android:id="@+id/nav_report_bug"
+                    android:icon="@drawable/ic_report_bug"
+                    android:title="@string/report_bug"/>
+                <item
+                    android:id="@+id/nav_contact_us"
+                    android:icon="@drawable/ic_mobile"
+                    android:title="@string/contact_us"/>
+            </menu>
+        </item>
+    </group>
+
+    <group
+        android:checkableBehavior="none">
+        <item
+            android:id="@+id/nav_update_menu"
+            android:icon="@drawable/ic_update"
+            android:title="@string/update_menu"/>
+        <item
+            android:id="@+id/nav_settings"
+            android:icon="@drawable/ic_settings"
+            android:title="@string/settings"/>
+    </group>
+
+    <group
+        android:id="@+id/nav_part_4"
+        android:checkableBehavior="none">
+        <item
+            android:id="@+id/nav_log_out"
+            android:icon="@drawable/ic_log_out"
+            android:title="@string/log_out"/>
+    </group>
+
+</menu>

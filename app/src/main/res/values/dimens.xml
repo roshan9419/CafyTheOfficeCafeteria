@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <dimen name="category_item_image_width">53dp</dimen>
+    <dimen name="category_item_image_height">53dp</dimen>
+
+    <dimen name="profile_card_elevation">3dp</dimen>
+    <dimen name="profile_card_margin_vertical">5dp</dimen>
+    <dimen name="profile_card_internal_vertical_space">12dp</dimen>
+
+    <dimen name="gender_selection_image_size">120dp</dimen>
+    <dimen name="gender_selection_border_size">140dp</dimen>
+
+</resources>

@@ -1,0 +1,33 @@
+<resources xmlns:tools="http://schemas.android.com/tools">
+    <!-- Base application theme. -->
+    <style name="Theme.CafyTheOfficeCafeteria" parent="Theme.MaterialComponents.DayNight.NoActionBar">
+        <!-- Primary brand color. -->
+        <item name="colorPrimary">@color/purple_theme_color</item>
+        <item name="colorPrimaryVariant">@color/purple_theme_color</item>
+        <item name="colorOnPrimary">@color/white</item>
+        <!-- Secondary brand color. -->
+        <item name="colorSecondary">@color/purple_theme_color</item>
+        <item name="colorSecondaryVariant">@color/purple_theme_color</item>
+        <item name="colorOnSecondary">@color/black</item>
+        <!-- Status bar color. -->
+        <item name="statusBarBackground">@color/status_bar</item>
+        <item name="android:statusBarColor" tools:targetApi="l">?attr/statusBarBackground</item>
+        <item name="android:windowLightStatusBar" tools:targetApi="23">true</item>
+
+        <!-- Customize your theme here. -->
+
+        <!-- Enable Window Content Transition -->
+        <item name="android:windowActivityTransitions">true</item>
+    </style>
+
+    <color name="status_bar">#fff</color>
+
+    <style name="TimeDialogTheme" parent="Theme.AppCompat.Light.Dialog">
+        <item name="colorAccent">@color/purple_theme_color</item>
+        <item name="colorControlNormal">@color/purple_theme_color</item>
+        <item name="buttonBarNegativeButtonStyle">@color/purple_theme_color</item>
+        <item name="buttonBarPositiveButtonStyle">@color/purple_theme_color</item>
+
+    </style>
+
+</resources>

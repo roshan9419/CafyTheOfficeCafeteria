@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical"
+    android:background="@color/white"
+    android:padding="15dp"
+    android:layout_marginBottom="5dp">
+
+    <TextView
+        android:id="@+id/saved_card_item_card_holder_name_tv"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/card_holder_name"
+        android:textSize="16sp"
+        android:textStyle="bold"
+        android:textColor="@color/text_dark_color" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+
+        <TextView
+            android:id="@+id/saved_card_item_card_number_tv"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="10dp"
+            android:text="@string/default_card_number"/>
+
+        <TextView
+            android:id="@+id/saved_card_item_exp_date_tv"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/default_date"/>
+
+    </LinearLayout>
+
+    <EditText
+        android:visibility="gone"
+        android:id="@+id/saved_card_item_cvv_et"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        android:hint="@string/cvv"
+        android:maxLength="3"
+        android:inputType="numberPassword"
+        android:drawablePadding="100dp"
+        android:drawableEnd="@drawable/ic_cvv"
+        android:background="@drawable/rounded_edit_text"/>
+
+    <Button
+        android:visibility="gone"
+        android:id="@+id/saved_card_item_pay_btn"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        android:padding="15dp"
+        android:text="@string/pay"/>
+
+</LinearLayout>

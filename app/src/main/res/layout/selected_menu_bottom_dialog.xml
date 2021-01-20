@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="horizontal"
+    android:background="@color/purple_theme_color"
+    android:gravity="center_vertical"
+    android:paddingHorizontal="20dp"
+    android:paddingVertical="10dp">
+
+    <LinearLayout
+        android:layout_width="0dp"
+        android:layout_weight="1"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        android:gravity="center_vertical">
+
+        <TextView
+            android:id="@+id/total_ordered_items_price_tv"
+            android:transitionName="totalOrderedItemsPriceTransition"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/default_price"
+            android:textSize="20sp"
+            android:textColor="@color/white"
+            android:fontFamily="@font/montserrat_semi_bold"/>
+
+        <TextView
+            android:id="@+id/total_ordered_items_tv"
+            android:transitionName="totalOrderedItemsTransition"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/your_order_default_items"
+            android:textSize="15sp"
+            android:textColor="@color/white"
+            android:fontFamily="@font/montserrat_semi_bold"/>
+    </LinearLayout>
+
+    <Button
+        android:id="@+id/place_order_btn"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:padding="15dp"
+        android:text="@string/place_order"
+        android:textAllCaps="false"
+        android:fontFamily="@font/montserrat_semi_bold"
+        android:textColor="@color/text_dark_color"
+        android:backgroundTint="@color/white"/>
+
+</LinearLayout>

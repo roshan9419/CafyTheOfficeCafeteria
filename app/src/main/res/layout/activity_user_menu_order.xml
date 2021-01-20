@@ -1,0 +1,243 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".UserMenuOrderActivity"
+    android:background="#F5F5F5"
+    android:orientation="vertical">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:paddingVertical="10dp"
+        android:paddingHorizontal="20dp">
+
+        <ImageView
+            android:layout_width="30dp"
+            android:layout_height="30dp"
+            android:src="@drawable/ic_arrow_upward"
+            app:tint="@color/text_dark_color"
+            android:rotation="-90"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            android:onClick="goBack"/>
+
+        <ImageView
+            android:id="@+id/user_menu_order_help_iv"
+            android:layout_width="30dp"
+            android:layout_height="30dp"
+            android:src="@drawable/ic_help"
+            app:tint="@color/text_dark_color"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent"/>
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+    <androidx.core.widget.NestedScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:scrollbars="none">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:layout_marginHorizontal="25dp"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/your_order"
+                    android:textSize="20sp"
+                    android:textColor="@color/text_dark_color"
+                    android:fontFamily="@font/montserrat_semi_bold"/>
+
+                <TextView
+                    android:id="@+id/order_total_items_tv"
+                    android:transitionName="totalOrderedItemsTransition"
+                    android:layout_width="0dp"
+                    android:layout_weight="1"
+                    android:layout_height="wrap_content"
+                    android:text="@string/default_quantity"
+                    android:textSize="16sp"
+                    android:textAlignment="textEnd"
+                    android:textColor="@color/text_light_color"
+                    android:fontFamily="@font/montserrat_semi_bold"/>
+            </LinearLayout>
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/order_recycler_view"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:paddingBottom="10dp"
+                android:clipToPadding="false"
+                android:layout_marginHorizontal="10dp"
+                tools:itemCount="3"
+                tools:listitem="@layout/list_menu_item"
+                android:nestedScrollingEnabled="false"/>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="25dp"
+                android:layout_marginTop="10dp"
+                android:text="@string/order_details"
+                android:textSize="16sp"
+                android:textColor="@color/text_dark_color"
+                android:fontFamily="@font/montserrat_semi_bold"/>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:layout_marginHorizontal="25dp"
+                android:layout_marginTop="15dp">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/total_price"
+                    android:textSize="15sp"
+                    android:textColor="@color/text_light_color"/>
+
+                <TextView
+                    android:id="@+id/order_total_price_tv"
+                    android:transitionName="totalOrderedItemsPriceTransition"
+                    android:layout_width="0dp"
+                    android:layout_weight="1"
+                    android:layout_height="wrap_content"
+                    android:text="@string/default_price"
+                    android:textSize="15sp"
+                    android:textAlignment="textEnd"
+                    android:textColor="@color/text_light_color"/>
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:layout_marginHorizontal="25dp"
+                android:layout_marginTop="10dp">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/tax"
+                    android:textSize="15sp"
+                    android:textColor="@color/text_light_color"/>
+
+                <TextView
+                    android:id="@+id/order_total_tax_tv"
+                    android:layout_width="0dp"
+                    android:layout_weight="1"
+                    android:layout_height="wrap_content"
+                    android:text="@string/default_price"
+                    android:textSize="15sp"
+                    android:textAlignment="textEnd"
+                    android:textColor="@color/text_light_color"/>
+
+            </LinearLayout>
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="10dp"
+                android:layout_marginTop="10dp"
+                android:layout_marginHorizontal="25dp"
+                android:background="@drawable/horizontal_line"/>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:layout_marginHorizontal="25dp"
+                android:layout_marginTop="5dp">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/sub_total"
+                    android:textSize="15sp"
+                    android:textColor="@color/text_light_color"/>
+
+                <TextView
+                    android:id="@+id/order_sub_total_tv"
+                    android:layout_width="0dp"
+                    android:layout_weight="1"
+                    android:layout_height="wrap_content"
+                    android:text="@string/default_price"
+                    android:textSize="15sp"
+                    android:textAlignment="textEnd"
+                    android:textColor="@color/text_light_color"/>
+
+            </LinearLayout>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="25dp"
+                android:layout_marginTop="25dp"
+                android:text="@string/time_for_take_away_of_order"
+                android:textSize="15sp"
+                android:textColor="@color/text_dark_color"
+                android:fontFamily="@font/montserrat_semi_bold"
+                app:drawableTint="@color/purple_theme_color"
+                app:drawableEndCompat="@drawable/ic_time"
+                android:drawablePadding="5dp"/>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:layout_marginHorizontal="25dp"
+                android:layout_marginTop="10dp">
+
+                <TextView
+                    android:id="@+id/order_take_away_time_tv"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="00:00 AM"
+                    android:textSize="15sp"
+                    android:textColor="@color/text_light_color"/>
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="20dp"
+                    android:text="@string/change_time"
+                    android:textSize="15sp"
+                    android:textAlignment="textEnd"
+                    android:textColor="@color/purple_theme_color"
+                    android:fontFamily="@font/montserrat_semi_bold"
+                    android:onClick="changeOrderTakeAwayTime"/>
+
+            </LinearLayout>
+
+            <Button
+                android:id="@+id/proceed_to_pay_btn"
+                android:layout_width="match_parent"
+                android:layout_height="60dp"
+                android:layout_marginVertical="20dp"
+                android:layout_marginHorizontal="25dp"
+                android:text="@string/proceed_to_pay"
+                android:textAllCaps="false"
+                android:textColor="@color/white"
+                android:fontFamily="@font/montserrat_semi_bold"
+                android:backgroundTint="@color/purple_theme_color"
+                android:onClick="openPaymentActivity"/>
+
+        </LinearLayout>
+
+    </androidx.core.widget.NestedScrollView>
+
+</LinearLayout>

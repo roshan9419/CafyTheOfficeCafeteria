@@ -1,0 +1,312 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".PreviewDetailsActivity"
+    android:orientation="vertical"
+    android:background="#F5F5F5">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:paddingVertical="20dp"
+        android:paddingHorizontal="15dp">
+
+        <ImageView
+            android:layout_width="25dp"
+            android:layout_height="25dp"
+            android:src="@drawable/ic_arrow_upward"
+            app:tint="@color/text_dark_color"
+            android:rotation="-90"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            android:onClick="goBack"/>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/preview_details"
+            android:textSize="18sp"
+            android:textColor="@color/text_dark_color"
+            android:fontFamily="@font/montserrat_semi_bold"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent"/>
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="30dp"
+            android:paddingBottom="100dp"
+            android:paddingHorizontal="20dp"
+            android:orientation="vertical"
+            android:clipToPadding="false">
+
+            <androidx.cardview.widget.CardView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginVertical="@dimen/profile_card_margin_vertical"
+                app:cardCornerRadius="5dp"
+                app:cardElevation="@dimen/profile_card_elevation"
+                app:cardPreventCornerOverlap="false">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginVertical="@dimen/profile_card_internal_vertical_space"
+                    android:layout_marginHorizontal="15dp"
+                    android:orientation="horizontal"
+                    android:gravity="center_vertical">
+
+                    <ImageView
+                        android:layout_width="30dp"
+                        android:layout_height="30dp"
+                        android:layout_marginEnd="10dp"
+                        android:src="@drawable/ic_user"
+                        app:tint="@color/purple_theme_color"/>
+
+                    <LinearLayout
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:orientation="vertical">
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="@string/name"
+                            android:fontFamily="@font/montserrat_bold"
+                            android:textSize="12sp"
+                            android:textColor="@color/purple_theme_color"/>
+                        <TextView
+                            android:id="@+id/preview_details_name"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="@string/name"
+                            android:textSize="15sp"
+                            android:textColor="@color/text_light_color"/>
+                    </LinearLayout>
+
+                </LinearLayout>
+
+            </androidx.cardview.widget.CardView>
+
+            <androidx.cardview.widget.CardView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginVertical="@dimen/profile_card_margin_vertical"
+                app:cardCornerRadius="5dp"
+                app:cardElevation="@dimen/profile_card_elevation"
+                app:cardPreventCornerOverlap="false">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginVertical="@dimen/profile_card_internal_vertical_space"
+                    android:layout_marginHorizontal="15dp"
+                    android:orientation="horizontal"
+                    android:gravity="center_vertical">
+
+                    <ImageView
+                        android:layout_width="30dp"
+                        android:layout_height="30dp"
+                        android:layout_marginEnd="10dp"
+                        android:src="@drawable/ic_email"
+                        app:tint="@color/purple_theme_color"/>
+
+                    <LinearLayout
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:orientation="vertical">
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="@string/e_mail"
+                            android:fontFamily="@font/montserrat_bold"
+                            android:textSize="12sp"
+                            android:textColor="@color/purple_theme_color"/>
+                        <TextView
+                            android:id="@+id/preview_details_email"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="@string/e_mail"
+                            android:textSize="15sp"
+                            android:textColor="@color/text_light_color"/>
+                    </LinearLayout>
+
+                </LinearLayout>
+
+            </androidx.cardview.widget.CardView>
+
+            <androidx.cardview.widget.CardView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginVertical="@dimen/profile_card_margin_vertical"
+                app:cardCornerRadius="5dp"
+                app:cardElevation="@dimen/profile_card_elevation"
+                app:cardPreventCornerOverlap="false">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginVertical="@dimen/profile_card_internal_vertical_space"
+                    android:layout_marginHorizontal="15dp"
+                    android:orientation="horizontal"
+                    android:gravity="center_vertical">
+
+                    <ImageView
+                        android:layout_width="30dp"
+                        android:layout_height="30dp"
+                        android:layout_marginEnd="10dp"
+                        android:src="@drawable/ic_organization"
+                        app:tint="@color/purple_theme_color"/>
+
+                    <LinearLayout
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:orientation="vertical">
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="@string/company_organization"
+                            android:fontFamily="@font/montserrat_bold"
+                            android:textSize="12sp"
+                            android:textColor="@color/purple_theme_color"/>
+                        <TextView
+                            android:id="@+id/preview_details_company_organization"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="@string/company_organization"
+                            android:textSize="15sp"
+                            android:textColor="@color/text_light_color"/>
+                    </LinearLayout>
+
+                </LinearLayout>
+
+            </androidx.cardview.widget.CardView>
+
+            <androidx.cardview.widget.CardView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginVertical="@dimen/profile_card_margin_vertical"
+                app:cardCornerRadius="5dp"
+                app:cardElevation="@dimen/profile_card_elevation"
+                app:cardPreventCornerOverlap="false">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginVertical="@dimen/profile_card_internal_vertical_space"
+                    android:layout_marginHorizontal="15dp"
+                    android:orientation="horizontal"
+                    android:gravity="center_vertical">
+
+                    <ImageView
+                        android:layout_width="30dp"
+                        android:layout_height="30dp"
+                        android:layout_marginEnd="10dp"
+                        android:src="@drawable/ic_employee_id"
+                        app:tint="@color/purple_theme_color"/>
+
+                    <LinearLayout
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:orientation="vertical">
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="@string/employee_id"
+                            android:fontFamily="@font/montserrat_bold"
+                            android:textSize="12sp"
+                            android:textColor="@color/purple_theme_color"/>
+                        <TextView
+                            android:id="@+id/preview_details_employee_id"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="@string/employee_id"
+                            android:textSize="15sp"
+                            android:textColor="@color/text_light_color"/>
+                    </LinearLayout>
+
+                </LinearLayout>
+
+            </androidx.cardview.widget.CardView>
+
+            <androidx.cardview.widget.CardView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginVertical="@dimen/profile_card_margin_vertical"
+                app:cardCornerRadius="5dp"
+                app:cardElevation="@dimen/profile_card_elevation"
+                app:cardPreventCornerOverlap="false">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginVertical="@dimen/profile_card_internal_vertical_space"
+                    android:layout_marginHorizontal="15dp"
+                    android:orientation="horizontal"
+                    android:gravity="center_vertical">
+
+                    <ImageView
+                        android:layout_width="30dp"
+                        android:layout_height="30dp"
+                        android:layout_marginEnd="10dp"
+                        android:src="@drawable/ic_mobile"
+                        app:tint="@color/purple_theme_color"/>
+
+                    <LinearLayout
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:orientation="vertical">
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="@string/mobile_number"
+                            android:fontFamily="@font/montserrat_bold"
+                            android:textSize="12sp"
+                            android:textColor="@color/purple_theme_color"/>
+                        <TextView
+                            android:id="@+id/preview_details_mobile_number"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="@string/mobile_number"
+                            android:textSize="15sp"
+                            android:textColor="@color/text_light_color"/>
+                    </LinearLayout>
+
+                </LinearLayout>
+
+            </androidx.cardview.widget.CardView>
+
+            <TextView
+                android:id="@+id/preview_details_employee_id_tv"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="20dp"
+                android:layout_marginBottom="10dp"
+                android:text="@string/your_id_card"
+                android:textSize="16sp"
+                android:fontFamily="@font/montserrat_semi_bold"
+                android:textColor="@color/text_light_color"/>
+
+            <ImageView
+                android:id="@+id/preview_details_employee_id_card_iv"
+                android:visibility="gone"
+                android:layout_width="wrap_content"
+                android:layout_height="250dp"
+                android:scaleType="fitStart"
+                android:contentDescription="@string/your_id_card"/>
+
+        </LinearLayout>
+
+    </ScrollView>
+
+</LinearLayout>

@@ -1,0 +1,251 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical"
+    android:layout_margin="15dp"
+    android:padding="10dp"
+    android:background="@drawable/rounded_current_order_item_boundary">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="15dp"
+            android:orientation="vertical">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Take-away time"
+                android:textSize="13sp"
+                android:textColor="@color/text_light_color"/>
+
+            <TextView
+                android:id="@+id/current_order_item_take_away_time_tv"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="10:32 AM"
+                android:textSize="16sp"
+                android:textColor="@color/text_dark_color"
+                android:fontFamily="@font/montserrat_semi_bold"/>
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Payment"
+                android:textSize="13sp"
+                android:textColor="@color/text_light_color"/>
+
+            <TextView
+                android:id="@+id/current_order_item_payment_status_tv"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Done"
+                android:textSize="16sp"
+                android:textColor="@color/text_dark_color"
+                android:fontFamily="@font/montserrat_semi_bold"/>
+
+        </LinearLayout>
+
+        <TextView
+            android:id="@+id/current_order_item_order_id_tv"
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:layout_height="match_parent"
+            android:text="MQ6183"
+            android:textSize="18sp"
+            android:textColor="@color/purple_theme_color"
+            android:fontFamily="@font/montserrat_semi_bold"
+            android:textAlignment="textEnd"/>
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
+        android:orientation="vertical">
+
+        <TableLayout
+            android:id="@+id/current_order_item_table_layout"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:stretchColumns="1">
+
+            <TableRow
+                android:layout_width="match_parent">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginEnd="10dp"
+                    android:text="Item Name"
+                    android:singleLine="true"
+                    android:textColor="@color/text_light_color"/>
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Qty"
+                    android:textAlignment="textEnd"
+                    android:textColor="@color/text_light_color"/>
+
+            </TableRow>
+
+        </TableLayout>
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="10dp"
+            android:layout_marginTop="5dp"
+            android:background="@drawable/horizontal_line"/>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/total_price"
+                android:textSize="15sp"
+                android:textColor="@color/text_dark_color"
+                android:fontFamily="@font/montserrat_semi_bold"/>
+
+            <TextView
+                android:id="@+id/current_order_item_total_price_tv"
+                android:layout_width="0dp"
+                android:layout_weight="1"
+                android:layout_height="wrap_content"
+                android:text="@string/default_price"
+                android:textSize="15sp"
+                android:textAlignment="textEnd"
+                android:textColor="@color/text_dark_color"
+                android:fontFamily="@font/montserrat_semi_bold"/>
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:layout_marginTop="5dp">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/tax"
+                android:textSize="15sp"
+                android:textColor="@color/text_dark_color"
+                android:fontFamily="@font/montserrat_semi_bold"/>
+
+            <TextView
+                android:id="@+id/current_order_item_total_tax_tv"
+                android:layout_width="0dp"
+                android:layout_weight="1"
+                android:layout_height="wrap_content"
+                android:text="@string/default_price"
+                android:textSize="15sp"
+                android:textAlignment="textEnd"
+                android:textColor="@color/text_dark_color"
+                android:fontFamily="@font/montserrat_semi_bold"/>
+
+        </LinearLayout>
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="10dp"
+            android:background="@drawable/horizontal_line"/>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/sub_total"
+                android:textSize="15sp"
+                android:textColor="@color/text_dark_color"
+                android:fontFamily="@font/montserrat_semi_bold"/>
+
+            <TextView
+                android:id="@+id/current_order_item_sub_total_tv"
+                android:layout_width="0dp"
+                android:layout_weight="1"
+                android:layout_height="wrap_content"
+                android:text="@string/default_price"
+                android:textSize="15sp"
+                android:textAlignment="textEnd"
+                android:textColor="@color/text_dark_color"
+                android:fontFamily="@font/montserrat_semi_bold"/>
+
+        </LinearLayout>
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
+        android:clipToPadding="false"
+        android:orientation="horizontal">
+
+        <com.google.android.material.floatingactionbutton.ExtendedFloatingActionButton
+            android:id="@+id/current_order_item_cancel_btn"
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="5dp"
+            android:elevation="0dp"
+            app:elevation="0dp"
+            android:minHeight="10dp"
+            android:text="@string/cancel_order"
+            android:textAllCaps="false"
+            android:textColor="@color/white"
+            android:backgroundTint="#D83838"
+            app:icon="@drawable/ic_cancel"
+            app:iconTint="@color/white"
+            app:iconSize="20dp"
+            app:iconPadding="0dp"
+            android:gravity="center"
+            />
+
+        <com.google.android.material.floatingactionbutton.ExtendedFloatingActionButton
+            android:id="@+id/current_order_item_show_qr_btn"
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="5dp"
+            android:elevation="0dp"
+            app:elevation="0dp"
+            android:minHeight="10dp"
+            android:text="Show QR"
+            android:textAllCaps="false"
+            android:textColor="@color/white"
+            app:icon="@drawable/ic_qr_code"
+            app:iconTint="@color/white"
+            app:iconSize="20dp"
+            app:iconPadding="0dp"
+            android:gravity="center"
+            />
+
+    </LinearLayout>
+
+</LinearLayout>

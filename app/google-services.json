@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "67630468381",
+    "project_id": "cafy---the-office-cafeteria",
+    "storage_bucket": "cafy---the-office-cafeteria.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:67630468381:android:77eac273196033770ba5f4",
+        "android_client_info": {
+          "package_name": "com.programmingtech.cafy_theofficecafeteria"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "67630468381-5d4pukn9sekl2p40fa5bv565bfdpfp7h.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyD8B40ZPop2S9k-Scjqi7puBB0aXfgNccU"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "67630468381-5d4pukn9sekl2p40fa5bv565bfdpfp7h.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

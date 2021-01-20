@@ -1,0 +1,673 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:animateLayoutChanges="true"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".PaymentActivity"
+    android:background="#F5F5F5"
+    android:orientation="vertical">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:paddingVertical="10dp"
+        android:paddingHorizontal="20dp">
+
+        <ImageView
+            android:id="@+id/payment_go_back_iv"
+            android:layout_width="30dp"
+            android:layout_height="30dp"
+            android:src="@drawable/ic_arrow_upward"
+            app:tint="@color/text_dark_color"
+            android:rotation="-90"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"/>
+
+        <TextView
+            android:id="@+id/total_payment_tv"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/default_price"
+            android:textSize="22sp"
+            android:textColor="@color/purple_theme_color"
+            android:fontFamily="@font/montserrat_bold"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent"/>
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+    <androidx.core.widget.NestedScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:scrollbars="none">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:paddingHorizontal="20dp"
+            android:clipToPadding="false"
+            android:orientation="vertical">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="20dp"
+                android:text="@string/payment_method"
+                android:textSize="20sp"
+                android:textColor="@color/text_dark_color"
+                android:fontFamily="@font/montserrat_semi_bold"/>
+
+            <androidx.cardview.widget.CardView
+                android:onClick="chooseModeOfPayment"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="10dp"
+                app:cardCornerRadius="5dp"
+                android:elevation="0dp"
+                app:cardElevation="0dp"
+                android:background="@color/white">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="15dp"
+                    android:orientation="horizontal"
+                    android:gravity="center_vertical">
+
+                    <ImageView
+                        android:layout_width="35dp"
+                        android:layout_height="30dp"
+                        android:layout_marginEnd="10dp"
+                        android:src="@drawable/payment_cash"
+                        android:contentDescription="@string/cash_payment"/>
+
+                    <TextView
+                        android:layout_width="0dp"
+                        android:layout_weight="1"
+                        android:layout_height="wrap_content"
+                        android:text="@string/cash_payment"
+                        android:textSize="16sp"
+                        android:textColor="@color/text_dark_color"/>
+
+                    <RadioButton
+                        android:id="@+id/cash_payment_radio_btn"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:minWidth="0dp"
+                        android:minHeight="0dp"
+                        android:checked="true"
+                        android:onClick="chooseModeOfPayment"/>
+                </LinearLayout>
+
+            </androidx.cardview.widget.CardView>
+
+            <androidx.cardview.widget.CardView
+                android:onClick="chooseModeOfPayment"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="10dp"
+                app:cardCornerRadius="5dp"
+                android:elevation="0dp"
+                app:cardElevation="0dp"
+                android:background="@color/white">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="15dp"
+                    android:orientation="horizontal"
+                    android:gravity="center_vertical">
+
+                    <ImageView
+                        android:layout_width="35dp"
+                        android:layout_height="30dp"
+                        android:layout_marginEnd="10dp"
+                        android:src="@drawable/payment_wallet"
+                        android:contentDescription="@string/wallets"/>
+
+                    <TextView
+                        android:layout_width="0dp"
+                        android:layout_weight="1"
+                        android:layout_height="wrap_content"
+                        android:text="@string/wallets"
+                        android:textSize="16sp"
+                        android:textColor="@color/text_dark_color"/>
+
+                    <RadioButton
+                        android:id="@+id/wallets_radio_btn"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:minWidth="0dp"
+                        android:minHeight="0dp"
+                        android:checked="false"
+                        android:onClick="chooseModeOfPayment"/>
+                </LinearLayout>
+
+            </androidx.cardview.widget.CardView>
+
+            <!-- Wallets -->
+            <LinearLayout
+                android:id="@+id/wallets_section_ll"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="20dp"
+                android:visibility="gone"
+                android:orientation="vertical">
+
+                <HorizontalScrollView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="5dp"
+                    android:scrollbars="none">
+
+                    <LinearLayout
+                        android:id="@+id/wallets_ll"
+                        android:layout_width="wrap_content"
+                        android:layout_height="60dp"
+                        android:orientation="horizontal"
+                        android:clipToPadding="false">
+
+                        <LinearLayout
+                            android:layout_width="wrap_content"
+                            android:layout_height="match_parent"
+                            android:layout_marginEnd="10dp"
+                            android:clickable="true"
+                            android:focusable="true"
+                            android:background="@drawable/border_selected_option">
+
+                            <ImageView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_margin="15dp"
+                                android:src="@drawable/paytm_logo"
+                                android:layout_gravity="center_vertical"/>
+
+                        </LinearLayout>
+
+                        <LinearLayout
+                            android:layout_width="wrap_content"
+                            android:layout_height="match_parent"
+                            android:layout_marginEnd="10dp"
+                            android:clickable="true"
+                            android:focusable="true"
+                            android:background="@drawable/border_unselected_option">
+
+                            <ImageView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_margin="15dp"
+                                android:src="@drawable/google_pay_logo"
+                                android:layout_gravity="center_vertical"/>
+
+                        </LinearLayout>
+
+                        <LinearLayout
+                            android:layout_width="wrap_content"
+                            android:layout_height="match_parent"
+                            android:layout_marginEnd="10dp"
+                            android:clickable="true"
+                            android:focusable="true"
+                            android:background="@drawable/border_unselected_option">
+
+                            <ImageView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_margin="15dp"
+                                android:src="@drawable/phonepe_logo"
+                                android:layout_gravity="center_vertical"/>
+
+                        </LinearLayout>
+
+                        <LinearLayout
+                            android:layout_width="wrap_content"
+                            android:layout_height="match_parent"
+                            android:layout_marginEnd="10dp"
+                            android:clickable="true"
+                            android:focusable="true"
+                            android:background="@drawable/border_unselected_option">
+
+                            <ImageView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_margin="15dp"
+                                android:translationY="5dp"
+                                android:src="@drawable/amazon_pay_logo"
+                                android:layout_gravity="center_vertical"/>
+
+                        </LinearLayout>
+
+                        <LinearLayout
+                            android:layout_width="wrap_content"
+                            android:layout_height="match_parent"
+                            android:layout_marginEnd="10dp"
+                            android:clickable="true"
+                            android:focusable="true"
+                            android:background="@drawable/border_unselected_option">
+
+                            <ImageView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_margin="15dp"
+                                android:src="@drawable/jio_money_logo"
+                                android:layout_gravity="center_vertical"/>
+
+                        </LinearLayout>
+
+                    </LinearLayout>
+
+                </HorizontalScrollView>
+
+                <Button
+                    android:id="@+id/payment_wallet_btn"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="@string/pay_securely"/>
+
+            </LinearLayout>
+
+            <androidx.cardview.widget.CardView
+                android:onClick="chooseModeOfPayment"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="10dp"
+                app:cardCornerRadius="5dp"
+                android:elevation="0dp"
+                app:cardElevation="0dp"
+                android:background="@color/white">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="15dp"
+                    android:orientation="horizontal"
+                    android:gravity="center_vertical">
+
+                    <ImageView
+                        android:layout_width="35dp"
+                        android:layout_height="30dp"
+                        android:layout_marginEnd="10dp"
+                        android:src="@drawable/payment_saved_cards"
+                        android:contentDescription="@string/saved_cards"/>
+
+                    <TextView
+                        android:layout_width="0dp"
+                        android:layout_weight="1"
+                        android:layout_height="wrap_content"
+                        android:text="@string/saved_cards"
+                        android:textSize="16sp"
+                        android:textColor="@color/text_dark_color"/>
+
+                    <RadioButton
+                        android:id="@+id/saved_cards_radio_btn"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:minWidth="0dp"
+                        android:minHeight="0dp"
+                        android:checked="false"
+                        android:onClick="chooseModeOfPayment"/>
+                </LinearLayout>
+
+            </androidx.cardview.widget.CardView>
+
+            <!-- Saved Cards -->
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/payment_saved_cards_recycler_view"
+                android:visibility="gone"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="10dp"
+                tools:listitem="@layout/saved_card_item"/>
+
+            <androidx.cardview.widget.CardView
+                android:onClick="chooseModeOfPayment"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="10dp"
+                app:cardCornerRadius="5dp"
+                android:elevation="0dp"
+                app:cardElevation="0dp"
+                android:background="@color/white">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="15dp"
+                    android:orientation="horizontal"
+                    android:gravity="center_vertical">
+
+                    <ImageView
+                        android:layout_width="35dp"
+                        android:layout_height="30dp"
+                        android:layout_marginEnd="10dp"
+                        android:src="@drawable/payment_credit_debit_card"
+                        android:contentDescription="@string/credit_or_debit_card"/>
+
+                    <TextView
+                        android:layout_width="0dp"
+                        android:layout_weight="1"
+                        android:layout_height="wrap_content"
+                        android:text="@string/credit_or_debit_card"
+                        android:textSize="16sp"
+                        android:textColor="@color/text_dark_color"/>
+
+                    <RadioButton
+                        android:id="@+id/credit_debit_card_radio_btn"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:minWidth="0dp"
+                        android:minHeight="0dp"
+                        android:checked="false"
+                        android:onClick="chooseModeOfPayment"/>
+                </LinearLayout>
+
+            </androidx.cardview.widget.CardView>
+
+            <!-- Credit-Debit Card-->
+            <LinearLayout
+                android:id="@+id/credit_debit_section_ll"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="20dp"
+                android:visibility="gone"
+                android:orientation="vertical"
+                android:padding="5dp"
+                android:clipToPadding="false">
+
+                <androidx.cardview.widget.CardView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="10dp"
+                    app:cardCornerRadius="5dp"
+                    android:elevation="3dp"
+                    android:background="@color/white"
+                    app:cardElevation="5dp">
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_margin="15dp"
+                        android:orientation="vertical">
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="@string/card_number"
+                            android:textSize="12sp"
+                            android:textColor="@color/text_dark_color"
+                            android:fontFamily="@font/montserrat_semi_bold"/>
+
+                        <EditText
+                            android:id="@+id/payment_credit_debit_card_number_et"
+                            android:layout_width="match_parent"
+                            android:layout_height="40dp"
+                            android:layout_marginTop="5dp"
+                            android:inputType="number"
+                            android:maxLength="16"
+                            android:fontFamily="@font/montserrat_regular"
+                            android:letterSpacing="0.2"
+                            android:background="@drawable/rounded_edit_text"/>
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:weightSum="2"
+                            android:orientation="horizontal">
+
+                            <LinearLayout
+                                android:layout_width="0dp"
+                                android:layout_weight="1"
+                                android:layout_height="wrap_content"
+                                android:layout_marginEnd="10dp"
+                                android:orientation="vertical">
+                                <TextView
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:layout_marginTop="10dp"
+                                    android:text="@string/expiry_validity_date"
+                                    android:textSize="12sp"
+                                    android:textColor="@color/text_dark_color"
+                                    android:fontFamily="@font/montserrat_semi_bold"/>
+
+                                <EditText
+                                    android:id="@+id/payment_credit_debit_expiry_date_et"
+                                    android:layout_width="match_parent"
+                                    android:layout_height="40dp"
+                                    android:layout_marginTop="5dp"
+                                    android:inputType="date"
+                                    android:maxLength="5"
+                                    android:hint="@string/mm_yy"
+                                    android:fontFamily="@font/montserrat_regular"
+                                    android:background="@drawable/rounded_edit_text"/>
+
+                            </LinearLayout>
+                            <LinearLayout
+                                android:layout_width="0dp"
+                                android:layout_weight="1"
+                                android:layout_height="wrap_content"
+                                android:layout_marginStart="10dp"
+                                android:orientation="vertical">
+                                <TextView
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:layout_marginTop="10dp"
+                                    android:text="@string/cvv"
+                                    android:textSize="12sp"
+                                    android:textColor="@color/text_dark_color"
+                                    android:fontFamily="@font/montserrat_semi_bold"/>
+
+                                <EditText
+                                    android:id="@+id/payment_credit_debit_cvv_et"
+                                    android:layout_width="match_parent"
+                                    android:layout_height="40dp"
+                                    android:layout_marginTop="5dp"
+                                    android:inputType="numberPassword"
+                                    android:textAllCaps="true"
+                                    android:maxLength="3"
+                                    android:hint="@string/xxx"
+                                    android:fontFamily="@font/montserrat_regular"
+                                    android:background="@drawable/rounded_edit_text"/>
+
+                            </LinearLayout>
+
+                        </LinearLayout>
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="10dp"
+                            android:text="@string/card_holder_name"
+                            android:textSize="12sp"
+                            android:textColor="@color/text_dark_color"
+                            android:fontFamily="@font/montserrat_semi_bold"/>
+
+                        <EditText
+                            android:id="@+id/payment_credit_debit_card_holder_name_et"
+                            android:layout_width="match_parent"
+                            android:layout_height="40dp"
+                            android:layout_marginTop="5dp"
+                            android:inputType="text"
+                            android:textAllCaps="true"
+                            android:fontFamily="@font/montserrat_regular"
+                            android:background="@drawable/rounded_edit_text"/>
+
+                    </LinearLayout>
+
+            </androidx.cardview.widget.CardView>
+
+                <androidx.appcompat.widget.SwitchCompat
+                    android:id="@+id/payment_credit_debit_saved_card_switch"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:checked="true"
+                    android:text="@string/save_this_card_for_future_payments"/>
+
+                <Button
+                    android:id="@+id/payment_credit_debit_card_btn"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:padding="15dp"
+                    android:text="@string/pay"/>
+
+            </LinearLayout>
+
+            <androidx.cardview.widget.CardView
+                android:onClick="chooseModeOfPayment"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="10dp"
+                app:cardCornerRadius="5dp"
+                android:elevation="0dp"
+                app:cardElevation="0dp"
+                android:background="@color/white">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="15dp"
+                    android:orientation="horizontal"
+                    android:gravity="center_vertical">
+
+                    <ImageView
+                        android:layout_width="35dp"
+                        android:layout_height="30dp"
+                        android:layout_marginEnd="10dp"
+                        android:src="@drawable/payment_upi"
+                        android:contentDescription="@string/bhim_upi"/>
+
+                    <TextView
+                        android:layout_width="0dp"
+                        android:layout_weight="1"
+                        android:layout_height="wrap_content"
+                        android:text="@string/bhim_upi"
+                        android:textSize="16sp"
+                        android:textColor="@color/text_dark_color"/>
+
+                    <RadioButton
+                        android:id="@+id/bhim_upi_radio_btn"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:minWidth="0dp"
+                        android:minHeight="0dp"
+                        android:checked="false"
+                        android:onClick="chooseModeOfPayment"/>
+                </LinearLayout>
+
+            </androidx.cardview.widget.CardView>
+
+            <!-- BHIM UPI-->
+            <LinearLayout
+                android:id="@+id/bhim_upi_section_ll"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="20dp"
+                android:visibility="gone"
+                android:orientation="vertical"
+                android:padding="5dp"
+                android:clipToPadding="false">
+
+                <androidx.cardview.widget.CardView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="10dp"
+                    app:cardCornerRadius="5dp"
+                    android:elevation="3dp"
+                    android:background="@color/white"
+                    app:cardElevation="5dp">
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_margin="20dp"
+                        android:orientation="vertical">
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="@string/enter_your_upi_id"
+                            android:textSize="12sp"
+                            android:textColor="@color/text_dark_color"
+                            android:fontFamily="@font/montserrat_semi_bold"/>
+
+                        <EditText
+                            android:id="@+id/payment_bhim_upi_et"
+                            android:layout_width="match_parent"
+                            android:layout_height="40dp"
+                            android:layout_marginTop="5dp"
+                            android:inputType="text"
+                            android:hint="@string/username_bank"
+                            android:background="@drawable/rounded_edit_text"/>
+
+                    </LinearLayout>
+
+                </androidx.cardview.widget.CardView>
+
+                <Button
+                    android:id="@+id/payment_bhim_upi_btn"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="5dp"
+                    android:padding="15dp"
+                    android:text="@string/pay"/>
+
+            </LinearLayout>
+
+            <androidx.cardview.widget.CardView
+                android:onClick="chooseModeOfPayment"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="10dp"
+                app:cardCornerRadius="5dp"
+                android:elevation="0dp"
+                app:cardElevation="0dp"
+                android:background="@color/white">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="15dp"
+                    android:orientation="horizontal"
+                    android:gravity="center_vertical">
+
+                    <ImageView
+                        android:layout_width="35dp"
+                        android:layout_height="30dp"
+                        android:layout_marginEnd="10dp"
+                        android:src="@drawable/payment_netbanking"
+                        android:contentDescription="@string/net_banking"/>
+
+                    <TextView
+                        android:layout_width="0dp"
+                        android:layout_weight="1"
+                        android:layout_height="wrap_content"
+                        android:text="@string/net_banking"
+                        android:textSize="16sp"
+                        android:textColor="@color/text_dark_color"/>
+
+                    <RadioButton
+                        android:id="@+id/net_banking_radio_btn"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:minWidth="0dp"
+                        android:minHeight="0dp"
+                        android:checked="false"
+                        android:onClick="chooseModeOfPayment"/>
+                </LinearLayout>
+
+            </androidx.cardview.widget.CardView>
+
+            <Button
+                android:id="@+id/confirm_payment_btn"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="20dp"
+                android:padding="15dp"
+                android:text="@string/confirm_payment"/>
+
+        </LinearLayout>
+
+    </androidx.core.widget.NestedScrollView>
+
+</LinearLayout>
