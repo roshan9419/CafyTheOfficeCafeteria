@@ -2,4 +2,4 @@
 
 Smooth & fast order...
 
-![thumbnail.png]
+![alt text](thumbnail.png)
