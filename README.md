@@ -4,6 +4,18 @@ Smooth & fast order...
 
 ![alt text](thumbnail.png)
 
+### How to run this project in Android Studio?  
+1. First import this project in android studio   
+2. Open Firebase and create a project (name it anything, like - Cafeteria Project)  
+3. If you face any issue, just watch some videos on YouTube  
+4. At some point you will get a option to download google-services.json (just download it)  
+5. Switch your Android view to Project view in Android Studio  
+6. Just paste the google-services.json in app directory  
+7. Enable Email Authentication  
+8. Enable the Realtime Database  
+9. Enable the Storage  
+10. Just Run the project !!!
+
 ### Features  
 1. Offline Menu Support  
 2. Choose weather to load images or not  
