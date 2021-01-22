@@ -8,7 +8,7 @@ Smooth & fast order...
 1. First import this project in android studio   
 2. Open Firebase and create a project (name it anything, like - Cafeteria Project)  
 3. If you face any issue, just watch some videos on YouTube  
-4. At some point you will get a option to download google-services.json (just download it)  
+4. At some point you will get an option to download google-services.json (just download it)  
 5. Switch your Android view to Project view in Android Studio  
 6. Just paste the google-services.json in app directory  
 7. Enable Email Authentication  
@@ -21,7 +21,7 @@ Smooth & fast order...
 2. Choose weather to load images or not  
 3. Show QR Code to canteen, without giving any details  
 4. Track your order history  
-5. View bill of every order  
+5. View bill on every order  
 6. Search easily  
 
 ### How to use App?  
@@ -43,10 +43,18 @@ Smooth & fast order...
 2. Choose from above category to find same related items  
 3. You can also search items  
 4. When items are added, press on Up arrow to show total price and items  
-5. Click Place Order  
+5. Click on Place Order  
 5. Review your order (Change or update items)  
 6. Set Take-away time for your order  
 7. View the total price, total tax, sub-total of your order  
 8. Click on Proceed to Pay button  
 9. Make a payment from many available payment methods (Cash, Wallets, Saved Cards, Credit/Debit Card, Bhim Upi)  
 10. Order Successful
+
+(You can then see the order in "My Orders")
+
+When you will reach to canteen to take away your order, just show the QR Code of that order to the staff. They will just scan it and will not ask any details from you.
+Enjoy your meal !!!
+
+## Watch Demo
+https://youtu.be/_nO0KRIcJdw
