@@ -332,12 +332,18 @@ class MainActivity : AppCompatActivity(), RecyclerFoodItemAdapter.OnItemClickLis
         
         AlertDialog.Builder(this)
             .setTitle("Attention")
-            .setMessage("Are you sure you want to Log Out ?")
+            .setMessage("Are you sure you want to Log Out ? You will lose all your Orders, as it is a demo App")
             .setPositiveButton("Yes", DialogInterface.OnClickListener {_, _ ->
                 Firebase.auth.signOut()
 
                 getSharedPreferences("settings", MODE_PRIVATE).edit().clear().apply() //deleting settings from offline
                 getSharedPreferences("user_profile_details", MODE_PRIVATE).edit().clear().apply() //deleting user details from offline
+
+                //removing tables
+                val db = DatabaseHandler(this)
+                db.dropCurrentOrdersTable()
+                db.dropOrderHistoryTable()
+                db.clearSavedCards()
 
                 startActivity(Intent(this, LoginUserActivity::class.java))
                 finish()
