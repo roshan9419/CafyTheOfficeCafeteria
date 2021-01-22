@@ -198,6 +198,16 @@ class DatabaseHandler(val context: Context) : SQLiteOpenHelper(context, DATABASE
         return "Order Cancelled"
     }
 
+    fun dropCurrentOrdersTable() {
+        try {
+            val db = this.writableDatabase
+            db.delete(CURRENT_ORDER_TABLE_NAME, null, null)
+            Toast.makeText(context, "All records are deleted", Toast.LENGTH_SHORT).show()
+        } catch (e: Exception) {
+            Toast.makeText(context, "Unable to delete the records", Toast.LENGTH_SHORT).show()
+        }
+    }
+
     fun insertOrderData(item: OrderHistoryItem) {
         val db = this.writableDatabase
         val cv = ContentValues()
