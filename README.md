@@ -11,7 +11,7 @@ Smooth & fast order...
 4. At some point you will get an option to download google-services.json (just download it)  
 5. Switch your Android view to Project view in Android Studio  
 6. Just paste the google-services.json in app directory  
-7. Enable Email Authentication  
+7. Enable Email Authentication in created Firebase Project 
 8. Enable the Realtime Database  
 9. Enable the Storage  
 10. Just Run the project !!!
