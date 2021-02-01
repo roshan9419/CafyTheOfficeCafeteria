@@ -42,23 +42,25 @@ Smooth & fast order...
 11. For first time, it will ask for your gender. Choose your gender  
 12. Enjoy !  
 
-### How to make an Order?  
-1. Add items by increasing their quantity  
-2. Choose from above category to find same related items  
-3. You can also search items  
-4. When items are added, press on Up arrow to show total price and items  
-5. Click on Place Order  
-5. Review your order (Change or update items)  
-6. Set Take-away time for your order  
-7. View the total price, total tax, sub-total of your order  
-8. Click on Proceed to Pay button  
-9. Make a payment from many available payment methods (Cash, Wallets, Saved Cards, Credit/Debit Card, Bhim Upi)  
-10. Order Successful
-
-(You can then see the order in "My Orders")
-
-When you will reach to canteen to take away your order, just show the QR Code of that order to the staff. They will just scan it and will not ask any details from you.
-Enjoy your meal !!!
+### Some Snapshots of this App  
+![alt text](CafyImages/1.png)
+![alt text](CafyImages/2.png)
+![alt text](CafyImages/3.png)
+![alt text](CafyImages/4.png)
+![alt text](CafyImages/5.png)
+![alt text](CafyImages/6.png)
+![alt text](CafyImages/7.png)
+![alt text](CafyImages/8.png)
+![alt text](CafyImages/9.png)
+![alt text](CafyImages/10.png)
+![alt text](CafyImages/11.png)
+![alt text](CafyImages/12.png)
+![alt text](CafyImages/13.png)
+![alt text](CafyImages/14.png)
+![alt text](CafyImages/15.png)
+![alt text](CafyImages/16.png)
+![alt text](CafyImages/17.png)
+![alt text](CafyImages/18.png)
 
 ## Watch Demo
 https://youtu.be/_nO0KRIcJdw
