@@ -58,7 +58,6 @@ Smooth & fast order...
 ![alt text](CafyImages/13.png)
 ![alt text](CafyImages/14.png)
 ![alt text](CafyImages/15.png)
-![alt text](CafyImages/16.png)
 ![alt text](CafyImages/17.png)
 ![alt text](CafyImages/18.png)
 
