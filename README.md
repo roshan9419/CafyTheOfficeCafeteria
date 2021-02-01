@@ -2,7 +2,7 @@
 
 Smooth & fast order...
 
-![alt text](thumbnail.png)
+![alt text](CafyImages/thumbnail.png)
 
 ### How to run this project in Android Studio?  
 1. First import this project in android studio (Download this project)    
@@ -18,7 +18,7 @@ Smooth & fast order...
 (NOTE:: Before running, make sure that you have added some items in food_menu and the canteen_info. I have provided "cafy---the-office-cafeteria-default-rtdb-export.json" file in which data is shown in json format, you can import this file to your Realtime Database. Also Add the images in Firebase Storage, and update the item_image_url in database, otherwise your App will crash)
 
 ### Format of Database
-![alt text](FormatOfDatabase.png)
+![alt text](CafyImages/FormatOfDatabase.png)
 
 ### Features  
 1. Offline Menu Support  
