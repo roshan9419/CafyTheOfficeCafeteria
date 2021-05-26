@@ -11,6 +11,7 @@ import android.widget.TextView
 import android.widget.Toast
 import androidx.appcompat.app.AlertDialog
 import com.google.firebase.database.*
+import datamodels.MenuItem
 
 class SettingsActivity : AppCompatActivity() {
 

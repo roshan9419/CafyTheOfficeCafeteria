@@ -1,5 +1,6 @@
 package com.programmingtech.cafy_theofficecafeteria
 
+import adapters.RecyclerFoodItemAdapter
 import android.app.ActivityOptions
 import android.app.ProgressDialog
 import android.content.DialogInterface
@@ -26,8 +27,8 @@ import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.ktx.auth
 import com.google.firebase.database.*
 import com.google.firebase.ktx.Firebase
+import datamodels.MenuItem
 import de.hdodenhof.circleimageview.CircleImageView
-import java.io.Serializable
 
 class MainActivity : AppCompatActivity(), RecyclerFoodItemAdapter.OnItemClickListener {
 

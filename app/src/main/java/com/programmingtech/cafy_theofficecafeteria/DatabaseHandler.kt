@@ -2,10 +2,12 @@ package com.programmingtech.cafy_theofficecafeteria
 
 import android.content.ContentValues
 import android.content.Context
-import android.content.SharedPreferences
 import android.database.sqlite.SQLiteDatabase
 import android.database.sqlite.SQLiteOpenHelper
 import android.widget.Toast
+import datamodels.MenuItem
+import datamodels.OrderHistoryItem
+import datamodels.SavedCardItem
 
 const val DATABASE_NAME = "MenuDB" //Offline Database
 

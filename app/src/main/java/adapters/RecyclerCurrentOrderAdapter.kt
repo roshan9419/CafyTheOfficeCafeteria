@@ -1,17 +1,17 @@
-package com.programmingtech.cafy_theofficecafeteria
+package adapters
 
 import android.content.Context
 import android.graphics.Color
-import android.text.TextUtils
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.*
 import android.widget.LinearLayout
 import androidx.core.content.res.ResourcesCompat
-import androidx.core.view.marginEnd
 import androidx.recyclerview.widget.RecyclerView
 import com.google.android.material.floatingactionbutton.ExtendedFloatingActionButton
+import com.programmingtech.cafy_theofficecafeteria.CurrentOrderItem
+import com.programmingtech.cafy_theofficecafeteria.R
 
 
 class RecyclerCurrentOrderAdapter(

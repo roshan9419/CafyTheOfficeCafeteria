@@ -1,4 +1,4 @@
-package com.programmingtech.cafy_theofficecafeteria
+package adapters
 
 import android.content.Context
 import android.view.LayoutInflater
@@ -6,6 +6,8 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
+import datamodels.OrderHistoryItem
+import com.programmingtech.cafy_theofficecafeteria.R
 
 class RecyclerOrderHistoryAdapter(var context: Context, private var orderHistoryList: ArrayList<OrderHistoryItem>) :
     RecyclerView.Adapter<RecyclerOrderHistoryAdapter.ItemListViewHolder>() {

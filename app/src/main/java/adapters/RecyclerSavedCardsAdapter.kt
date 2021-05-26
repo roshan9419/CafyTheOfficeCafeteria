@@ -1,4 +1,4 @@
-package com.programmingtech.cafy_theofficecafeteria
+package adapters
 
 import android.content.Context
 import android.view.LayoutInflater
@@ -6,6 +6,8 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.*
 import androidx.recyclerview.widget.RecyclerView
+import com.programmingtech.cafy_theofficecafeteria.R
+import datamodels.SavedCardItem
 
 class RecyclerSavedCardsAdapter(
     val context: Context,
@@ -29,7 +31,7 @@ class RecyclerSavedCardsAdapter(
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ItemListViewHolder {
         val itemView = LayoutInflater.from(parent.context).inflate(R.layout.saved_card_item, parent, false)
-        return RecyclerSavedCardsAdapter.ItemListViewHolder(itemView)
+        return ItemListViewHolder(itemView)
     }
 
     override fun onBindViewHolder(holder: ItemListViewHolder, position: Int) {

@@ -1,5 +1,6 @@
 package com.programmingtech.cafy_theofficecafeteria
 
+import adapters.RecyclerSavedCardsAdapter
 import android.app.AlertDialog
 import android.content.DialogInterface
 import android.content.Intent
@@ -12,6 +13,7 @@ import androidx.appcompat.widget.SwitchCompat
 import androidx.cardview.widget.CardView
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import datamodels.SavedCardItem
 
 class PaymentActivity : AppCompatActivity(), RecyclerSavedCardsAdapter.OnItemClickListener {
 

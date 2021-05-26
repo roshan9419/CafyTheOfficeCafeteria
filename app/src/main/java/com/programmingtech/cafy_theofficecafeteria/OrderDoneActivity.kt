@@ -2,27 +2,14 @@ package com.programmingtech.cafy_theofficecafeteria
 
 import android.content.DialogInterface
 import android.content.Intent
-import android.content.pm.PackageManager
-import android.graphics.Bitmap
-import android.media.Image
-import android.net.Uri
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.os.Environment
 import android.os.Handler
-import android.os.StrictMode
-import android.util.Log
-import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.*
 import androidx.appcompat.app.AlertDialog
-import androidx.constraintlayout.widget.ConstraintLayout
-import androidx.core.app.ActivityCompat
-import com.google.android.gms.dynamic.SupportFragmentWrapper
-import java.io.File
-import java.io.FileOutputStream
-import java.lang.Exception
+import datamodels.OrderHistoryItem
 import java.text.SimpleDateFormat
 import java.util.*
 

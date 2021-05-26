@@ -6,9 +6,9 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:fitsSystemWindows="true"
     tools:context=".MainActivity"
-    android:background="#E6F8F8F8"
-    android:fitsSystemWindows="true">
+    android:background="#E6F8F8F8">
 
     <LinearLayout
         android:layout_width="match_parent"

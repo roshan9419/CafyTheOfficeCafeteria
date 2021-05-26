@@ -1,4 +1,4 @@
-package com.programmingtech.cafy_theofficecafeteria
+package adapters
 
 import android.content.Context
 import android.view.LayoutInflater
@@ -9,6 +9,8 @@ import android.widget.Filterable
 import android.widget.ImageView
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
+import datamodels.MenuItem
+import com.programmingtech.cafy_theofficecafeteria.R
 import com.squareup.picasso.Picasso
 import java.util.*
 import kotlin.collections.ArrayList
@@ -17,7 +19,8 @@ class RecyclerFoodItemAdapter(
     var context: Context,
     private var itemList: ArrayList<MenuItem>,
     private val loadDefaultImage: Int,
-    listener: OnItemClickListener) :
+    listener: OnItemClickListener
+) :
     RecyclerView.Adapter<RecyclerFoodItemAdapter.ItemListViewHolder>(), Filterable {
 
     private var totalPrice = 0F
@@ -43,13 +46,13 @@ class RecyclerFoodItemAdapter(
         val itemQuantityDecreaseIV: ImageView = itemView.findViewById(R.id.decrease_item_quantity_iv)
     }
 
-    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecyclerFoodItemAdapter.ItemListViewHolder {
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ItemListViewHolder {
         val itemView = LayoutInflater.from(parent.context).inflate(R.layout.list_menu_item, parent, false)
         fullItemList = ArrayList<MenuItem>(itemList)
         return ItemListViewHolder(itemView)
     }
 
-    override fun onBindViewHolder(holder: RecyclerFoodItemAdapter.ItemListViewHolder, position: Int) {
+    override fun onBindViewHolder(holder: ItemListViewHolder, position: Int) {
         val currentItem = itemList[position]
 
         if(loadDefaultImage == 1) holder.itemImageIV.setImageResource(R.drawable.default_item_image)

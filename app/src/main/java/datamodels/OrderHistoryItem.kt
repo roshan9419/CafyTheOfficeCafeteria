@@ -1,4 +1,4 @@
-package com.programmingtech.cafy_theofficecafeteria
+package datamodels
 
 data class OrderHistoryItem(
     var date: String = "DATE",
