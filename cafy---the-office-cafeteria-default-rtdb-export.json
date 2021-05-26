@@ -1,0 +1,28 @@
+{
+  "canteen_info" : {
+    "canteen_email" : "cafycafeteria1234@gmail.com",
+    "canteen_number" : 1234567890
+  },
+  "food_menu" : [ null, {
+    "item_category" : "Burger",
+    "item_desc" : "It’s juicy, meaty, greasily satisfying, which you love it",
+    "item_image_url" : "https://firebasestorage.googleapis.com/v0/b/cafy---the-office-cafeteria.appspot.com/o/foodMenuItems%2F1.jpg?alt=media&token=08d8c384-bf25-455c-8444-99925a12217c",
+    "item_name" : "Cheese Burger",
+    "item_price" : 1,
+    "stars" : 4.5
+  }, {
+    "item_category" : "Cold drinks",
+    "item_desc" : "Fresh refreshing, cool medium size Coca Cola",
+    "item_image_url" : "https://firebasestorage.googleapis.com/v0/b/cafy---the-office-cafeteria.appspot.com/o/foodMenuItems%2F2.jpg?alt=media&token=2ffb18b4-ef95-4c7b-927a-4ef0c1799efb",
+    "item_name" : "Coca Cola (500ml)",
+    "item_price" : 0.8,
+    "stars" : 4
+  }, {
+    "item_category" : "Extras",
+    "item_desc" : "Hot savory chicken, white fluffy rice with rich flavor.",
+    "item_image_url" : "https://firebasestorage.googleapis.com/v0/b/cafy---the-office-cafeteria.appspot.com/o/foodMenuItems%2F52.jpg?alt=media&token=f09501d3-d142-45e5-b976-eaefd58061cb",
+    "item_name" : "Chicken Biryani (Per Plate)",
+    "item_price" : 3.22,
+    "stars" : 4.6
+  } ]
+}

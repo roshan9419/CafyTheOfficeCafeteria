@@ -2,19 +2,23 @@
 
 Smooth & fast order...
 
-![alt text](thumbnail.png)
+![alt text](CafyImages/thumbnail.png)
 
 ### How to run this project in Android Studio?  
-1. First import this project in android studio   
-2. Open Firebase and create a project (name it anything, like - Cafeteria Project)  
-3. If you face any issue, just watch some videos on YouTube  
-4. At some point you will get an option to download google-services.json (just download it)  
+1. First import this project in android studio (Download this project)    
+2. Open Firebase Console and create a project (name it anything, like - Cafeteria Project)  
+3. If you face any issue, just watch some videos on YouTube or see this post (https://firebase.google.com/docs/android/setup)  
+4. At some point you will get an option to download "google-services.json" (just download it)  
 5. Switch your Android view to Project view in Android Studio  
-6. Just paste the google-services.json in app directory  
-7. Enable Email Authentication  
-8. Enable the Realtime Database  
-9. Enable the Storage  
-10. Just Run the project !!!
+6. Just paste the "google-services.json" in "app" directory  
+7. Enable "Email Authentication" in created Firebase Project 
+8. Enable the "Realtime Database" and "Storage" in your firebase project    
+9. Just Run the project !!!
+
+(NOTE:: Before running, make sure that you have added some items in food_menu and the canteen_info. I have provided "cafy---the-office-cafeteria-default-rtdb-export.json" file in which data is shown in json format, you can import this file to your Realtime Database. Also Add the images in Firebase Storage, and update the item_image_url in database, otherwise your App will crash)
+
+### Format of Database
+![alt text](CafyImages/FormatOfDatabase.png)
 
 ### Features  
 1. Offline Menu Support  
@@ -38,23 +42,24 @@ Smooth & fast order...
 11. For first time, it will ask for your gender. Choose your gender  
 12. Enjoy !  
 
-### How to make an Order?  
-1. Add items by increasing their quantity  
-2. Choose from above category to find same related items  
-3. You can also search items  
-4. When items are added, press on Up arrow to show total price and items  
-5. Click on Place Order  
-5. Review your order (Change or update items)  
-6. Set Take-away time for your order  
-7. View the total price, total tax, sub-total of your order  
-8. Click on Proceed to Pay button  
-9. Make a payment from many available payment methods (Cash, Wallets, Saved Cards, Credit/Debit Card, Bhim Upi)  
-10. Order Successful
-
-(You can then see the order in "My Orders")
-
-When you will reach to canteen to take away your order, just show the QR Code of that order to the staff. They will just scan it and will not ask any details from you.
-Enjoy your meal !!!
+### Some Snapshots of this App  
+![alt text](CafyImages/1.png)
+![alt text](CafyImages/2.png)
+![alt text](CafyImages/3.png)
+![alt text](CafyImages/4.png)
+![alt text](CafyImages/5.png)
+![alt text](CafyImages/6.png)
+![alt text](CafyImages/7.png)
+![alt text](CafyImages/8.png)
+![alt text](CafyImages/9.png)
+![alt text](CafyImages/10.png)
+![alt text](CafyImages/11.png)
+![alt text](CafyImages/12.png)
+![alt text](CafyImages/13.png)
+![alt text](CafyImages/14.png)
+![alt text](CafyImages/15.png)
+![alt text](CafyImages/17.png)
+![alt text](CafyImages/18.png)
 
 ## Watch Demo
 https://youtu.be/_nO0KRIcJdw
