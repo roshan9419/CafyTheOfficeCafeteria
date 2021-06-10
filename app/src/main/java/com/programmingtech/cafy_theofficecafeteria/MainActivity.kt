@@ -29,9 +29,11 @@ import com.google.firebase.database.*
 import com.google.firebase.ktx.Firebase
 import datamodels.MenuItem
 import de.hdodenhof.circleimageview.CircleImageView
+import interfaces.MenuApi
 import services.DatabaseHandler
+import services.FirebaseDBService
 
-class MainActivity : AppCompatActivity(), RecyclerFoodItemAdapter.OnItemClickListener {
+class MainActivity : AppCompatActivity(), RecyclerFoodItemAdapter.OnItemClickListener, MenuApi {
 
     private lateinit var auth: FirebaseAuth
     private lateinit var databaseRef: DatabaseReference
@@ -59,6 +61,8 @@ class MainActivity : AppCompatActivity(), RecyclerFoodItemAdapter.OnItemClickLis
 
     private var searchIsActive = false
     private var doubleBackToExit = false
+
+    private lateinit var progressDialog: ProgressDialog
 
     override fun onBackPressed() {
         if (searchIsActive) {
@@ -193,35 +197,23 @@ class MainActivity : AppCompatActivity(), RecyclerFoodItemAdapter.OnItemClickLis
     }
 
     private fun loadOnlineMenu() {
-        val progressDialog = ProgressDialog(this)
+        progressDialog = ProgressDialog(this)
         progressDialog.setCancelable(false)
         progressDialog.setTitle("Loading Menu...")
         progressDialog.setMessage("For fast and smooth experience, you can download Menu for Offline.")
         progressDialog.create()
         progressDialog.show()
 
-        val menuDbRef = databaseRef.child("food_menu")
-        menuDbRef.addListenerForSingleValueEvent(object : ValueEventListener {
-            override fun onDataChange(snapshot: DataSnapshot) {
-                for(snap in snapshot.children) {
-                    val item = MenuItem(
-                        snap.child("item_image_url").value.toString(),
-                        snap.child("item_name").value.toString(),
-                        snap.child("item_price").value.toString().toFloat(),
-                        snap.child("item_desc").value.toString(),
-                        snap.child("item_category").value.toString(),
-                        snap.child("stars").value.toString().toFloat()
-                    )
-                    allItems.add(item)
-                }
-                allItems.shuffle() //so that every time user can see different items on opening app
-                recyclerFoodAdapter.notifyItemRangeInserted(0, allItems.size)
-                progressDialog.dismiss()
-            }
-            override fun onCancelled(error: DatabaseError) {
-                Toast.makeText(applicationContext, "Something Happened\n$error", Toast.LENGTH_LONG).show()
-            }
-        })
+        FirebaseDBService().readAllMenu(this)
+    }
+
+    override fun onFetchSuccessListener(list: ArrayList<MenuItem>) {
+
+        for (item in list) {
+            allItems.add(item)
+        }
+        recyclerFoodAdapter.notifyItemRangeInserted(0, allItems.size)
+        progressDialog.dismiss()
     }
 
     private fun loadSearchTask() {
