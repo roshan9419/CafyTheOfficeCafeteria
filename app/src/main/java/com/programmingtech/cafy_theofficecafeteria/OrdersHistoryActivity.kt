@@ -12,6 +12,7 @@ import androidx.appcompat.app.AlertDialog
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import datamodels.OrderHistoryItem
+import services.DatabaseHandler
 
 class OrdersHistoryActivity : AppCompatActivity() {
 

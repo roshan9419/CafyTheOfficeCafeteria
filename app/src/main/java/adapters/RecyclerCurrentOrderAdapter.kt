@@ -10,7 +10,7 @@ import android.widget.LinearLayout
 import androidx.core.content.res.ResourcesCompat
 import androidx.recyclerview.widget.RecyclerView
 import com.google.android.material.floatingactionbutton.ExtendedFloatingActionButton
-import com.programmingtech.cafy_theofficecafeteria.CurrentOrderItem
+import datamodels.CurrentOrderItem
 import com.programmingtech.cafy_theofficecafeteria.R
 
 

@@ -29,6 +29,7 @@ import com.google.firebase.database.*
 import com.google.firebase.ktx.Firebase
 import datamodels.MenuItem
 import de.hdodenhof.circleimageview.CircleImageView
+import services.DatabaseHandler
 
 class MainActivity : AppCompatActivity(), RecyclerFoodItemAdapter.OnItemClickListener {
 

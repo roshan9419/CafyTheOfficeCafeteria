@@ -1,4 +1,4 @@
-package com.programmingtech.cafy_theofficecafeteria
+package datamodels
 
 data class CurrentOrderItem(
     var orderID: String = "ORDER_ID",
