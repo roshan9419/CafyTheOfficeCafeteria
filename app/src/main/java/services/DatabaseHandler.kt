@@ -9,16 +9,19 @@ import datamodels.*
 
 const val DATABASE_NAME = "MenuDB" //Offline Database
 
+const val COL_ID = "id"
+
 const val OFFLINE_FOOD_MENU_TABLE_NAME = "offline_food_menu"
+const val COL_ITEM_ID = "item_id"
 const val COL_ITEM_NAME = "item_name"
 const val COL_ITEM_PRICE = "item_price"
 const val COL_ITEM_DESC = "item_desc"
 const val COL_ITEM_STAR = "item_star"
 const val COL_ITEM_CATEGORY = "item_category"
 const val COL_ITEM_IMAGE_URL = "item_image_url"
-const val COL_ID = "id"
 
 const val CART_TABLE_NAME = "current_cart"
+const val CART_ITEM_ID = "item_id"
 const val CART_IMAGE_URL = "image_url"
 const val CART_ITEM_NAME = "item_name"
 const val CART_ITEM_PRICE = "item_price"
@@ -52,7 +55,7 @@ class DatabaseHandler(val context: Context) : SQLiteOpenHelper(context, DATABASE
     override fun onCreate(db: SQLiteDatabase?) {
 
         val createOfflineMenuTable = "CREATE TABLE $OFFLINE_FOOD_MENU_TABLE_NAME (" +
-                "$COL_ID INTEGER PRIMARY KEY AUTOINCREMENT, " +
+                "$COL_ITEM_ID VARCHAR(256), " +
                 "$COL_ITEM_NAME VARCHAR(256), " +
                 "$COL_ITEM_PRICE REAL," +
                 "$COL_ITEM_DESC VARCHAR(256)," +
@@ -62,11 +65,11 @@ class DatabaseHandler(val context: Context) : SQLiteOpenHelper(context, DATABASE
                 ");"
 
         val createCartTable = "CREATE TABLE $CART_TABLE_NAME (" +
-                "$COL_ID INTEGER PRIMARY KEY AUTOINCREMENT, " +
+                "$CART_ITEM_ID VARCHAR(256), " +
                 "$CART_ITEM_NAME VARCHAR(256), " +
                 "$CART_ITEM_PRICE REAL," +
                 "$CART_ITEM_SHORT_DESC VARCHAR(256)," +
-                "$CART_ITEM_QTY REAL," +
+                "$CART_ITEM_QTY INTEGER," +
                 "$CART_ITEM_STARS REAL," +
                 "$CART_IMAGE_URL VARCHAR(256)" +
                 ");"
@@ -112,18 +115,19 @@ class DatabaseHandler(val context: Context) : SQLiteOpenHelper(context, DATABASE
     fun insertCartItem(item: CartItem) {
         val db = this.writableDatabase
 
-        val query = "SELECT * FROM $CART_TABLE_NAME WHERE $CART_ITEM_NAME='${item.itemName}';"
+        val query = "SELECT * FROM $CART_TABLE_NAME WHERE $CART_ITEM_ID='${item.itemID}';"
         val cursor = db.rawQuery(query, null);
-        if (cursor.count > 0) { //cart item is already added
-            // Update qty
+        if (cursor.count > 0) {
+            // Update qty, cart item is already added
             val cv = ContentValues()
             cv.put(CART_ITEM_QTY, item.quantity)
-            db.update(CART_TABLE_NAME, cv, "$CART_ITEM_NAME = ?", Array(1) { item.itemName })
+            db.update(CART_TABLE_NAME, cv, "$CART_ITEM_ID = ?", Array(1) { item.itemID })
             return
         }
         cursor.close();
 
         val cv = ContentValues()
+        cv.put(CART_ITEM_ID, item.itemID)
         cv.put(CART_ITEM_NAME, item.itemName)
         cv.put(CART_ITEM_PRICE, item.itemPrice)
         cv.put(CART_ITEM_SHORT_DESC, item.itemShortDesc)
@@ -137,9 +141,58 @@ class DatabaseHandler(val context: Context) : SQLiteOpenHelper(context, DATABASE
         }
     }
 
+    fun readCartData(): MutableList<CartItem> {
+        val list: MutableList<CartItem> = ArrayList()
+
+        val db = this.readableDatabase
+        val query = "SELECT * from $CART_TABLE_NAME"
+        val result = db.rawQuery(query, null)
+
+        if (result.moveToFirst()) {
+            do {
+                val item = CartItem()
+                item.itemID = result.getString(result.getColumnIndex(CART_ITEM_ID)).toString()
+                item.imageUrl =
+                    result.getString(result.getColumnIndex(CART_IMAGE_URL)).toString()
+                item.itemName = result.getString(result.getColumnIndex(CART_ITEM_NAME)).toString()
+                item.itemPrice = result.getFloat(result.getColumnIndex(CART_ITEM_PRICE))
+                item.itemShortDesc =
+                    result.getString(result.getColumnIndex(CART_ITEM_SHORT_DESC)).toString()
+                item.quantity = result.getInt(result.getColumnIndex(CART_ITEM_QTY))
+                item.itemStars = result.getFloat(result.getColumnIndex(CART_ITEM_STARS))
+
+                list.add(item)
+            } while (result.moveToNext())
+        }
+
+        result.close()
+        db.close()
+
+        return list
+    }
+
+    fun deleteCartItem(item: CartItem) {
+        try {
+            val db = this.writableDatabase
+            db.delete(CART_TABLE_NAME, "$CART_ITEM_ID = ?", Array(1){item.itemID})
+        } catch (e: Exception) {
+            Toast.makeText(context, "Failed to Delete Cart Item\n$e", Toast.LENGTH_SHORT).show()
+        }
+    }
+
+    fun clearCartTable() {
+        try {
+            val db = this.writableDatabase
+            db.delete(CART_TABLE_NAME, null, null)
+        } catch (e: Exception) {
+            Toast.makeText(context, "Unable to delete the records", Toast.LENGTH_SHORT).show()
+        }
+    }
+
     fun insertOfflineMenuData(item: MenuItem) {
         val db = this.writableDatabase
         val cv = ContentValues()
+        cv.put(COL_ITEM_ID, item.itemID)
         cv.put(COL_ITEM_NAME, item.itemName)
         cv.put(COL_ITEM_PRICE, item.itemPrice)
         cv.put(COL_ITEM_DESC, item.itemShortDesc)
@@ -162,6 +215,7 @@ class DatabaseHandler(val context: Context) : SQLiteOpenHelper(context, DATABASE
         if (result.moveToFirst()) {
             do {
                 val item = MenuItem()
+                item.itemID = result.getString(result.getColumnIndex(COL_ITEM_ID)).toString()
                 item.imageUrl =
                     result.getString(result.getColumnIndex(COL_ITEM_IMAGE_URL)).toString()
                 item.itemName = result.getString(result.getColumnIndex(COL_ITEM_NAME)).toString()

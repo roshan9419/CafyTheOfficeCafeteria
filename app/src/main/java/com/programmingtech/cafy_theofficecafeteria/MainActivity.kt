@@ -27,9 +27,11 @@ import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.ktx.auth
 import com.google.firebase.database.*
 import com.google.firebase.ktx.Firebase
+import datamodels.CartItem
 import datamodels.MenuItem
 import de.hdodenhof.circleimageview.CircleImageView
 import interfaces.MenuApi
+import interfaces.RequestType
 import services.DatabaseHandler
 import services.FirebaseDBService
 
@@ -37,6 +39,8 @@ class MainActivity : AppCompatActivity(), RecyclerFoodItemAdapter.OnItemClickLis
 
     private lateinit var auth: FirebaseAuth
     private lateinit var databaseRef: DatabaseReference
+
+    private val db = DatabaseHandler(this)
 
     private lateinit var toggle: ActionBarDrawerToggle
     private lateinit var navView: NavigationView
@@ -79,7 +83,7 @@ class MainActivity : AppCompatActivity(), RecyclerFoodItemAdapter.OnItemClickLis
             drawerLayout.closeDrawer(GravityCompat.START)
             return
         }
-        if(doubleBackToExit) {
+        if (doubleBackToExit) {
             super.onBackPressed()
             return
         }
@@ -95,6 +99,7 @@ class MainActivity : AppCompatActivity(), RecyclerFoodItemAdapter.OnItemClickLis
         auth = FirebaseAuth.getInstance()
         databaseRef = FirebaseDatabase.getInstance().reference
 
+        db.clearCartTable()
         loadProfile()
         loadNavigationDrawer()
         loadMenu()
@@ -120,10 +125,11 @@ class MainActivity : AppCompatActivity(), RecyclerFoodItemAdapter.OnItemClickLis
                 override fun onDataChange(snapshot: DataSnapshot) {
                     empGender = snapshot.child("gender").value.toString()
                     //by default male icon is attached
-                    if(empGender == "female") {
+                    if (empGender == "female") {
                         userIcon.setImageDrawable(resources.getDrawable(R.drawable.user_female))
                     }
                 }
+
                 override fun onCancelled(error: DatabaseError) {}
             })
     }
@@ -143,32 +149,36 @@ class MainActivity : AppCompatActivity(), RecyclerFoodItemAdapter.OnItemClickLis
 
         showAllSwitch = findViewById(R.id.show_all_items_switch)
         showAllSwitch.setOnClickListener {
-            if(showAllSwitch.isChecked) {
+            if (showAllSwitch.isChecked) {
                 recyclerFoodAdapter.filterList(allItems) //display complete list
                 val container: LinearLayout = findViewById(R.id.food_categories_container_ll)
-                for(ll in container.children) {
-                    ll.alpha = 1.0f //change alpha value of all the category items, so it will indicate that they are not pressed
+                for (ll in container.children) {
+                    ll.alpha =
+                        1.0f //change alpha value of all the category items, so it will indicate that they are not pressed
                 }
             }
         }
 
-        when(sharedPref.getInt("menuMode", 0)) {
+        when (sharedPref.getInt("menuMode", 0)) {
             0 -> loadOnlineMenu()
             1 -> { // Offline
-                val db = DatabaseHandler(this)
                 val data = db.readOfflineMenuData()
 
-                if(data.size == 0) { //means, offline database is not available
+                if (data.size == 0) { //means, offline database is not available
                     AlertDialog.Builder(this)
                         .setMessage("Offline Menu is now not available. Do you want download the menu for Offline?")
-                        .setPositiveButton("Yes, Download it", DialogInterface.OnClickListener {dialogInterface, _ ->
-                            updateOfflineFoodMenu(true)
-                            dialogInterface.dismiss()
-                        })
-                        .setNegativeButton("No, Continue to Online Mode", DialogInterface.OnClickListener {dialogInterface, _ ->
-                            loadOnlineMenu()
-                            dialogInterface.dismiss()
-                        })
+                        .setPositiveButton(
+                            "Yes, Download it",
+                            DialogInterface.OnClickListener { dialogInterface, _ ->
+                                updateOfflineFoodMenu(true)
+                                dialogInterface.dismiss()
+                            })
+                        .setNegativeButton(
+                            "No, Continue to Online Mode",
+                            DialogInterface.OnClickListener { dialogInterface, _ ->
+                                loadOnlineMenu()
+                                dialogInterface.dismiss()
+                            })
                         .setCancelable(false)
                         .create().show()
                     return
@@ -180,11 +190,11 @@ class MainActivity : AppCompatActivity(), RecyclerFoodItemAdapter.OnItemClickLis
     }
 
     private fun loadOfflineMenu() {
-        val db = DatabaseHandler(this)
         val data = db.readOfflineMenuData()
 
-        for(i in 0 until data.size) {
+        for (i in 0 until data.size) {
             val item = MenuItem()
+            item.itemID = data[i].itemID
             item.imageUrl = data[i].imageUrl
             item.itemName = data[i].itemName
             item.itemPrice = data[i].itemPrice
@@ -204,16 +214,7 @@ class MainActivity : AppCompatActivity(), RecyclerFoodItemAdapter.OnItemClickLis
         progressDialog.create()
         progressDialog.show()
 
-        FirebaseDBService().readAllMenu(this)
-    }
-
-    override fun onFetchSuccessListener(list: ArrayList<MenuItem>) {
-
-        for (item in list) {
-            allItems.add(item)
-        }
-        recyclerFoodAdapter.notifyItemRangeInserted(0, allItems.size)
-        progressDialog.dismiss()
+        FirebaseDBService().readAllMenu(this, RequestType.READ)
     }
 
     private fun loadSearchTask() {
@@ -237,6 +238,7 @@ class MainActivity : AppCompatActivity(), RecyclerFoodItemAdapter.OnItemClickLis
             override fun onQueryTextSubmit(p0: String?): Boolean {
                 return false
             }
+
             override fun onQueryTextChange(p0: String?): Boolean {
                 recyclerFoodAdapter.filter.filter(p0)
                 return false
@@ -247,14 +249,14 @@ class MainActivity : AppCompatActivity(), RecyclerFoodItemAdapter.OnItemClickLis
     fun showTagItems(view: View) {
         //displays the items which are of same category
         val container: LinearLayout = findViewById(R.id.food_categories_container_ll)
-        for(ll in container.children) {
+        for (ll in container.children) {
             ll.alpha = 1.0f
         }
         (view as LinearLayout).alpha = 0.5f
         val tag = ((view as LinearLayout).getChildAt(1) as TextView).text.toString()
         val filterList = ArrayList<MenuItem>()
-        for(item in allItems) {
-            if(item.itemTag == tag) filterList.add(item)
+        for (item in allItems) {
+            if (item.itemTag == tag) filterList.add(item)
         }
         recyclerFoodAdapter.filterList(filterList)
         showAllSwitch.isChecked = false
@@ -269,21 +271,35 @@ class MainActivity : AppCompatActivity(), RecyclerFoodItemAdapter.OnItemClickLis
 
         val drawerDelay: Long = 150 //delay of the drawer to close
         navView.setNavigationItemSelectedListener {
-            when(it.itemId) {
+            when (it.itemId) {
                 R.id.nav_food_menu -> {
                     drawerLayout.closeDrawer(GravityCompat.START)
                 }
                 R.id.nav_profile -> {
                     drawerLayout.closeDrawer(GravityCompat.START)
-                    Handler().postDelayed({openUserProfileActivity()}, drawerDelay)
+                    Handler().postDelayed({ openUserProfileActivity() }, drawerDelay)
                 }
                 R.id.nav_my_orders -> {
                     drawerLayout.closeDrawer(GravityCompat.START)
-                    Handler().postDelayed({startActivity(Intent(this, MyCurrentOrdersActivity::class.java))}, drawerDelay)
+                    Handler().postDelayed({
+                        startActivity(
+                            Intent(
+                                this,
+                                MyCurrentOrdersActivity::class.java
+                            )
+                        )
+                    }, drawerDelay)
                 }
                 R.id.nav_orders_history -> {
                     drawerLayout.closeDrawer(GravityCompat.START)
-                    Handler().postDelayed({startActivity(Intent(this, OrdersHistoryActivity::class.java))}, drawerDelay)
+                    Handler().postDelayed({
+                        startActivity(
+                            Intent(
+                                this,
+                                OrdersHistoryActivity::class.java
+                            )
+                        )
+                    }, drawerDelay)
                 }
                 R.id.nav_share_app -> {
                     shareApp()
@@ -293,7 +309,14 @@ class MainActivity : AppCompatActivity(), RecyclerFoodItemAdapter.OnItemClickLis
                 }
                 R.id.nav_contact_us -> {
                     drawerLayout.closeDrawer(GravityCompat.START)
-                    Handler().postDelayed({startActivity(Intent(this, ContactUsActivity::class.java))}, drawerDelay)
+                    Handler().postDelayed({
+                        startActivity(
+                            Intent(
+                                this,
+                                ContactUsActivity::class.java
+                            )
+                        )
+                    }, drawerDelay)
                 }
                 R.id.nav_update_menu -> {
                     drawerLayout.closeDrawer(GravityCompat.START)
@@ -301,7 +324,14 @@ class MainActivity : AppCompatActivity(), RecyclerFoodItemAdapter.OnItemClickLis
                 }
                 R.id.nav_settings -> {
                     drawerLayout.closeDrawer(GravityCompat.START)
-                    Handler().postDelayed({startActivity(Intent(this, SettingsActivity::class.java))}, drawerDelay)
+                    Handler().postDelayed({
+                        startActivity(
+                            Intent(
+                                this,
+                                SettingsActivity::class.java
+                            )
+                        )
+                    }, drawerDelay)
                 }
                 R.id.nav_log_out -> {
                     drawerLayout.closeDrawer(GravityCompat.START)
@@ -323,18 +353,19 @@ class MainActivity : AppCompatActivity(), RecyclerFoodItemAdapter.OnItemClickLis
     private fun logOutUser() {
         // Remove all the settings
         // Remove all the order history, my orders (warn him/her to Backup the data)
-        
+
         AlertDialog.Builder(this)
             .setTitle("Attention")
             .setMessage("Are you sure you want to Log Out ? You will lose all your Orders, as it is a demo App")
-            .setPositiveButton("Yes", DialogInterface.OnClickListener {_, _ ->
+            .setPositiveButton("Yes", DialogInterface.OnClickListener { _, _ ->
                 Firebase.auth.signOut()
 
-                getSharedPreferences("settings", MODE_PRIVATE).edit().clear().apply() //deleting settings from offline
-                getSharedPreferences("user_profile_details", MODE_PRIVATE).edit().clear().apply() //deleting user details from offline
+                getSharedPreferences("settings", MODE_PRIVATE).edit().clear()
+                    .apply() //deleting settings from offline
+                getSharedPreferences("user_profile_details", MODE_PRIVATE).edit().clear()
+                    .apply() //deleting user details from offline
 
                 //removing tables
-                val db = DatabaseHandler(this)
                 db.dropCurrentOrdersTable()
                 db.dropOrderHistoryTable()
                 db.clearSavedCards()
@@ -342,14 +373,16 @@ class MainActivity : AppCompatActivity(), RecyclerFoodItemAdapter.OnItemClickLis
                 startActivity(Intent(this, LoginUserActivity::class.java))
                 finish()
             })
-            .setNegativeButton("No", DialogInterface.OnClickListener {dialogInterface, _ ->
-                dialogInterface.dismiss() }
+            .setNegativeButton("No", DialogInterface.OnClickListener { dialogInterface, _ ->
+                dialogInterface.dismiss()
+            }
             )
             .create().show()
     }
 
     private fun shareApp() {
-        val message = "Try out this awesome App on Google Play!\nhttps://play.google.com/store/apps/details?id=$packageName"
+        val message =
+            "Try out this awesome App on Google Play!\nhttps://play.google.com/store/apps/details?id=$packageName"
         val intent = Intent(Intent.ACTION_SEND)
         intent.putExtra(Intent.EXTRA_TEXT, message)
         intent.type = "text/plain"
@@ -359,9 +392,18 @@ class MainActivity : AppCompatActivity(), RecyclerFoodItemAdapter.OnItemClickLis
     fun showBottomDialog(view: View) {
         val bottomDialog = BottomSheetSelectedItemDialog()
         val bundle = Bundle()
-        bundle.putFloat("total_price", recyclerFoodAdapter.getTotalPrice())
-        bundle.putInt("total_items", recyclerFoodAdapter.getTotalItems())
-        bundle.putParcelableArrayList("orderedList", recyclerFoodAdapter.getOrderedList() as ArrayList<out Parcelable?>?)
+
+        var totalPrice = 0.0f
+        var totalItems = 0
+
+        for (item in db.readCartData()) {
+            totalPrice += item.itemPrice
+            totalItems += item.quantity
+        }
+
+        bundle.putFloat("totalPrice", totalPrice)
+        bundle.putInt("totalItems", totalItems)
+        // bundle.putParcelableArrayList("orderedList", recyclerFoodAdapter.getOrderedList() as ArrayList<out Parcelable?>?)
 
         bottomDialog.arguments = bundle
         bottomDialog.show(supportFragmentManager, "BottomSheetDialog")
@@ -371,45 +413,79 @@ class MainActivity : AppCompatActivity(), RecyclerFoodItemAdapter.OnItemClickLis
         val intent = Intent(this, UserProfileActivity::class.java)
         intent.putExtra("gender", this.empGender)
 
-        val options = ActivityOptions.makeSceneTransitionAnimation(this, userIcon, "userIconTransition")
+        val options =
+            ActivityOptions.makeSceneTransitionAnimation(this, userIcon, "userIconTransition")
         startActivity(intent, options.toBundle())
+    }
+
+    private fun updateOfflineFoodMenu(offlineMenuToVisible: Boolean = false) {
+        db.clearTheOfflineMenuTable() // clear the older records first
+
+        progressDialog.setTitle("Updating...")
+        progressDialog.setMessage("Offline Menu is preparing for you...")
+        progressDialog.show()
+
+        FirebaseDBService().readAllMenu(this, RequestType.OFFLINE_UPDATE)
+    }
+
+    override fun onFetchSuccessListener(list: ArrayList<MenuItem>, requestType: RequestType) {
+
+        if (requestType == RequestType.READ) {
+            for (item in list) {
+                allItems.add(item)
+            }
+            recyclerFoodAdapter.notifyItemRangeInserted(0, allItems.size)
+        }
+
+        if (requestType == RequestType.OFFLINE_UPDATE) {
+            for (item in list) {
+                db.insertOfflineMenuData(item)
+            }
+            Toast.makeText(applicationContext, "Offline Menu Updated", Toast.LENGTH_LONG).show()
+            loadOfflineMenu()
+        }
+
+        progressDialog.dismiss()
     }
 
     override fun onItemClick(item: MenuItem) {
         //Do some stuff, when we click on an item, like Show More details of that item
     }
 
-    private fun updateOfflineFoodMenu(offlineMenuToVisible: Boolean = false) {
-        val db = DatabaseHandler(this)
-        db.clearTheOfflineMenuTable() // clear the older records first
+    override fun onPlusBtnClick(item: MenuItem) {
+        item.quantity += 1
+        db.insertCartItem(
+            CartItem(
+                itemID = item.itemID,
+                itemName = item.itemName,
+                imageUrl = item.imageUrl,
+                itemPrice = item.itemPrice,
+                quantity = item.quantity,
+                itemStars = item.itemStars,
+                itemShortDesc = item.itemShortDesc
+            )
+        )
+    }
 
-        val progressDialog = ProgressDialog(this)
-        progressDialog.setTitle("Updating...")
-        progressDialog.setMessage("Offline Menu is preparing for you...")
-        progressDialog.show()
+    override fun onMinusBtnClick(item: MenuItem) {
+        if (item.quantity == 0) return
+        item.quantity -= 1
 
-        val menuDbRef = databaseRef.child("food_menu")
-        menuDbRef.addListenerForSingleValueEvent(object : ValueEventListener {
-            override fun onDataChange(snapshot: DataSnapshot) {
-                for(snap in snapshot.children) {
-                    val item = MenuItem(
-                        snap.child("item_image_url").value.toString(),
-                        snap.child("item_name").value.toString(),
-                        snap.child("item_price").value.toString().toFloat(),
-                        snap.child("item_desc").value.toString(),
-                        snap.child("item_category").value.toString(),
-                        snap.child("stars").value.toString().toFloat()
-                    )
-                    db.insertOfflineMenuData(item)
-                }
-                progressDialog.dismiss()
-                if(offlineMenuToVisible) loadOfflineMenu() //if menu is not available then load it
-                Toast.makeText(applicationContext, "Offline Menu Updated", Toast.LENGTH_LONG).show()
-            }
-            override fun onCancelled(error: DatabaseError) {
-                Toast.makeText(applicationContext, "Something Happened\n$error", Toast.LENGTH_LONG).show()
-            }
-        })
+        val cartItem = CartItem(
+            itemID = item.itemID,
+            itemName = item.itemName,
+            imageUrl = item.imageUrl,
+            itemPrice = item.itemPrice,
+            quantity = item.quantity,
+            itemStars = item.itemStars,
+            itemShortDesc = item.itemShortDesc
+        )
+
+        if (item.quantity == 0) {
+            db.deleteCartItem(cartItem)
+        } else {
+            db.insertCartItem(cartItem) // Update
+        }
     }
 
 }

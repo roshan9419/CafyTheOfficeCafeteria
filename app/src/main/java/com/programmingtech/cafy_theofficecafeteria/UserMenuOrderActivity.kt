@@ -62,8 +62,8 @@ class UserMenuOrderActivity : AppCompatActivity(), RecyclerOrderItemAdapter.OnIt
         proceedToPayBtn = findViewById(R.id.proceed_to_pay_btn)
         orderTakeAwayTV = findViewById(R.id.order_take_away_time_tv)
 
-        totalPrice = intent.getFloatExtra("totalPrice", 1000F)
-        totalItems = intent.getIntExtra("totalItems", 1000)
+        totalPrice = intent.getFloatExtra("totalPrice", 0F)
+        totalItems = intent.getIntExtra("totalItems", 0)
         totalTax = totalPrice * 0.12F
 
         loadOrderDetails()

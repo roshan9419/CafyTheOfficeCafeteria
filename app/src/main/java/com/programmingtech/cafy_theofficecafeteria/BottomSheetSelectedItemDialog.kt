@@ -24,9 +24,8 @@ open class BottomSheetSelectedItemDialog: BottomSheetDialogFragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        val totalPrice = this.arguments?.getFloat("total_price")
-        val totalItems = this.arguments?.getInt("total_items")
-        val orderedList = this.arguments?.getParcelableArrayList<MenuItem>("orderedList")
+        val totalPrice = this.arguments?.getFloat("totalPrice")
+        val totalItems = this.arguments?.getInt("totalItems")
 
         view.findViewById<TextView>(R.id.total_ordered_items_price_tv).text = "$%.2f".format(totalPrice)
         view.findViewById<TextView>(R.id.total_ordered_items_tv).text = "Your Order ($totalItems items)"
@@ -37,7 +36,6 @@ open class BottomSheetSelectedItemDialog: BottomSheetDialogFragment() {
                 val intent = Intent(context, UserMenuOrderActivity::class.java)
                 intent.putExtra("totalItems", totalItems)
                 intent.putExtra("totalPrice", totalPrice)
-                intent.putExtra("orderedList", orderedList) //Sending the complete list of item selected from MainActivity
 
                 dismiss()
                 startActivity(intent)
