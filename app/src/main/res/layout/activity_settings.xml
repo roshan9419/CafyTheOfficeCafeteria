@@ -301,6 +301,7 @@
                         android:textSize="18sp"/>
 
                     <TextView
+                        android:id="@+id/app_version_tv"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="@string/app_version_number"

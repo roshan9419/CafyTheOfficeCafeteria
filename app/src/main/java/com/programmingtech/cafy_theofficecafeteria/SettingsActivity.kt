@@ -179,6 +179,8 @@ class SettingsActivity : AppCompatActivity(), MenuApi {
             0 -> menuModeTV.text = "Online"
             1 -> menuModeTV.text = "Offline"
         }
+
+        findViewById<TextView>(R.id.app_version_tv).text = BuildConfig.VERSION_NAME
     }
 
 }
