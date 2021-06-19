@@ -12,8 +12,9 @@ Smooth & fast order...
 5. Switch your Android view to Project view in Android Studio  
 6. Just paste the "google-services.json" in "app" directory  
 7. Enable "Email Authentication" in created Firebase Project 
-8. Enable the "Realtime Database" and "Storage" in your firebase project    
-9. Just Run the project !!!
+8. Enable the "Realtime Database" and "Storage" in your firebase project  
+9. Create folder "foodMenuItems" and upload your menuItem images, and add the url link in realtime database.    
+10. Just Run the project !!!
 
 (NOTE:: Before running, make sure that you have added some items in food_menu and the canteen_info. I have provided "cafy---the-office-cafeteria-default-rtdb-export.json" file in which data is shown in json format, you can import this file to your Realtime Database. Also Add the images in Firebase Storage, and update the item_image_url in database, otherwise your App will crash)
 
