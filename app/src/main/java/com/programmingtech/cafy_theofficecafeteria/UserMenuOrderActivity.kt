@@ -15,7 +15,9 @@ import android.widget.TextView
 import android.widget.TimePicker
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import datamodels.CartItem
 import datamodels.MenuItem
+import services.DatabaseHandler
 import java.lang.Exception
 import java.text.SimpleDateFormat
 import java.util.*
@@ -88,7 +90,11 @@ class UserMenuOrderActivity : AppCompatActivity(), RecyclerOrderItemAdapter.OnIt
 
     private fun loadRecyclerAdapter() {
         val sharedPref: SharedPreferences = getSharedPreferences("settings", MODE_PRIVATE)
-        val orderedItems: ArrayList<MenuItem> = intent.getSerializableExtra("orderedList") as ArrayList<MenuItem>
+        val orderedItems: ArrayList<CartItem> = ArrayList()
+
+        for (item in DatabaseHandler(this).readCartData()) {
+            orderedItems.add(item)
+        }
 
         itemRecyclerView = findViewById(R.id.order_recycler_view)
         recyclerAdapter = RecyclerOrderItemAdapter(
@@ -149,8 +155,6 @@ class UserMenuOrderActivity : AppCompatActivity(), RecyclerOrderItemAdapter.OnIt
         intent.putExtra("totalTaxPrice", recyclerAdapter.getTotalTax())
         intent.putExtra("subTotalPrice", recyclerAdapter.getSubTotalPrice())
         intent.putExtra("takeAwayTime", orderTakeAwayTV.text.toString())
-        intent.putExtra("orderItemNames", recyclerAdapter.getOrderItemNames())
-        intent.putExtra("orderItemQty", recyclerAdapter.getOrderItemQty())
         startActivity(intent)
 
     }

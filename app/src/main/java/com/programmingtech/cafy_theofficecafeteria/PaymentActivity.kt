@@ -43,9 +43,6 @@ class PaymentActivity : AppCompatActivity(), RecyclerSavedCardsAdapter.OnItemCli
 
     var takeAwayTime = ""
 
-    var orderItemNames = ""
-    var orderItemQty = ""
-
     private var selectedWallet = ""
     private var selectedSavedCard = ""
     private var enteredCreditDebitCard = ""
@@ -78,9 +75,6 @@ class PaymentActivity : AppCompatActivity(), RecyclerSavedCardsAdapter.OnItemCli
         subTotalPrice = intent.getFloatExtra("subTotalPrice", 0.0F)
 
         takeAwayTime = intent?.getStringExtra("takeAwayTime").toString()
-
-        orderItemNames = intent?.getStringExtra("orderItemNames").toString()
-        orderItemQty = intent?.getStringExtra("orderItemQty").toString()
 
         totalPaymentTV = findViewById(R.id.total_payment_tv)
         totalPaymentTV.text = "\$%.2f".format(subTotalPrice)
@@ -275,8 +269,6 @@ class PaymentActivity : AppCompatActivity(), RecyclerSavedCardsAdapter.OnItemCli
         intent.putExtra("totalTaxPrice", totalTaxPrice)
         intent.putExtra("subTotalPrice", subTotalPrice)
         intent.putExtra("takeAwayTime", takeAwayTime)
-        intent.putExtra("orderItemNames", orderItemNames)
-        intent.putExtra("orderItemQty", orderItemQty)
         intent.putExtra("paymentMethod", paymentMethod)
 
         startActivity(intent)

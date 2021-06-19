@@ -5,16 +5,16 @@ import android.content.DialogInterface
 import android.content.SharedPreferences
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.widget.ImageView
-import android.widget.LinearLayout
-import android.widget.TextView
-import android.widget.Toast
+import android.widget.*
 import androidx.appcompat.app.AlertDialog
 import com.google.firebase.database.*
 import datamodels.MenuItem
+import interfaces.MenuApi
+import interfaces.RequestType
 import services.DatabaseHandler
+import services.FirebaseDBService
 
-class SettingsActivity : AppCompatActivity() {
+class SettingsActivity : AppCompatActivity(), MenuApi {
 
     private lateinit var loadItemImageLL: LinearLayout
     private lateinit var loadItemImageTV: TextView
@@ -29,6 +29,8 @@ class SettingsActivity : AppCompatActivity() {
     private lateinit var deleteOrdersHistoryLL: LinearLayout
 
     private lateinit var sharedPref: SharedPreferences
+
+    private lateinit var progressDialog: ProgressDialog
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -133,36 +135,26 @@ class SettingsActivity : AppCompatActivity() {
     }
 
     private fun updateMenuForOffline() {
-        val db = DatabaseHandler(this)
-        db.clearTheOfflineMenuTable()
-
-        val progressDialog = ProgressDialog(this)
+        progressDialog = ProgressDialog(this)
         progressDialog.setTitle("Updating...")
         progressDialog.setMessage("Offline Menu is preparing for you...")
         progressDialog.show()
 
-        val databaseRef: DatabaseReference = FirebaseDatabase.getInstance().reference
-        val menuDbRef = databaseRef.child("food_menu")
-        menuDbRef.addListenerForSingleValueEvent(object : ValueEventListener {
-            override fun onDataChange(snapshot: DataSnapshot) {
-                for(snap in snapshot.children) {
-                    val item = MenuItem(
-                        snap.child("item_image_url").value.toString(),
-                        snap.child("item_name").value.toString(),
-                        snap.child("item_price").value.toString().toFloat(),
-                        snap.child("item_desc").value.toString(),
-                        snap.child("item_category").value.toString(),
-                        snap.child("stars").value.toString().toFloat()
-                    )
-                    db.insertOfflineMenuData(item)
-                }
-                progressDialog.dismiss()
-                Toast.makeText(applicationContext, "Offline Menu Updated", Toast.LENGTH_LONG).show()
+        FirebaseDBService().readAllMenu(this, RequestType.OFFLINE_UPDATE)
+    }
+
+    override fun onFetchSuccessListener(list: ArrayList<MenuItem>, requestType: RequestType) {
+        val db = DatabaseHandler(this)
+        db.clearTheOfflineMenuTable()
+
+        if (requestType == RequestType.OFFLINE_UPDATE) {
+            for (item in list) {
+                db.insertOfflineMenuData(item)
             }
-            override fun onCancelled(error: DatabaseError) {
-                Toast.makeText(applicationContext, "Something Happened\n$error", Toast.LENGTH_LONG).show()
-            }
-        })
+            Toast.makeText(applicationContext, "Offline Menu Updated", Toast.LENGTH_LONG).show()
+        }
+
+        progressDialog.dismiss()
     }
 
     private fun deleteOfflineMenu() {
@@ -188,4 +180,5 @@ class SettingsActivity : AppCompatActivity() {
             1 -> menuModeTV.text = "Offline"
         }
     }
+
 }

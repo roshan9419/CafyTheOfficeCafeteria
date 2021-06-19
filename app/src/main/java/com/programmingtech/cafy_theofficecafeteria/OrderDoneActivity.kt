@@ -30,9 +30,6 @@ class OrderDoneActivity : AppCompatActivity() {
     private var paymentMethod = ""
     private var takeAwayTime = ""
 
-    private var orderItemNames = ""
-    private var orderItemQuantities = ""
-
     private var orderID = ""
     private var orderDate = ""
 
@@ -60,9 +57,6 @@ class OrderDoneActivity : AppCompatActivity() {
 
         paymentMethod = intent?.getStringExtra("paymentMethod").toString()
         takeAwayTime = intent?.getStringExtra("takeAwayTime").toString()
-
-        orderItemNames = intent?.getStringExtra("orderItemNames").toString()
-        orderItemQuantities = intent?.getStringExtra("orderItemQty").toString()
 
 
         findViewById<TextView>(R.id.order_done_total_amount_tv).text = "%.2f".format(subTotalPrice)
@@ -123,8 +117,8 @@ class OrderDoneActivity : AppCompatActivity() {
             orderID,
             takeAwayTime,
             if(paymentMethod.startsWith("Pending")) "Pending" else "Done",
-            orderItemNames,
-            orderItemQuantities,
+            getOrderItemNames(),
+            getOrderItemQty(),
             totalItemPrice.toString(),
             totalTaxPrice.toString(),
             subTotalPrice.toString()
@@ -175,4 +169,22 @@ class OrderDoneActivity : AppCompatActivity() {
     }
 
     fun openMainActivity(view: View) {onBackPressed()}
+
+    private fun getOrderItemNames(): String {
+        //stores all the item names in a single string separated by (;)
+        var itemNames = ""
+        for(item in DatabaseHandler(this).readCartData()) {
+            itemNames += item.itemName + ";"
+        }
+        return itemNames.substring(0, itemNames.length-1)
+    }
+
+    private fun getOrderItemQty(): String {
+        //stores all the item qty in a single string separated by (;)
+        var itemQty = ""
+        for(item in DatabaseHandler(this).readCartData()) {
+            itemQty += item.quantity.toString() + ";"
+        }
+        return itemQty.substring(0, itemQty.length-1)
+    }
 }

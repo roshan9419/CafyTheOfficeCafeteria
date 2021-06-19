@@ -12,9 +12,10 @@ import androidx.recyclerview.widget.RecyclerView
 import datamodels.MenuItem
 import com.programmingtech.cafy_theofficecafeteria.R
 import com.squareup.picasso.Picasso
+import datamodels.CartItem
 
 class RecyclerOrderItemAdapter(var context: Context,
-                               private val itemOrderedList: ArrayList<MenuItem>,
+                               private val itemOrderedList: ArrayList<CartItem>,
                                private val activityTotalItemTV: TextView,
                                TotalItem: Int,
                                private val activityTotalPriceTV: TextView,
@@ -127,22 +128,4 @@ class RecyclerOrderItemAdapter(var context: Context,
     fun getTotalItemPrice(): Float = totalPrice
     fun getTotalTax(): Float = totalTax
     fun getSubTotalPrice(): Float = totalPrice + totalTax
-
-    fun getOrderItemNames(): String {
-        //stores all the item names in a single string separated by (;)
-        var itemNames = ""
-        for(item in itemOrderedList) {
-            itemNames += item.itemName + ";"
-        }
-        return itemNames.substring(0, itemNames.length-1)
-    }
-
-    fun getOrderItemQty(): String {
-        //stores all the item qty in a single string separated by (;)
-        var itemQty = ""
-        for(item in itemOrderedList) {
-            itemQty += item.quantity.toString() + ";"
-        }
-        return itemQty.substring(0, itemQty.length-1)
-    }
 }
